@@ -9,19 +9,30 @@ import java.util.Scanner;
 public class Storage extends Skeleton {
 
     private Integer capacity;
+    private Integer shelfCapacity;
 
-    public Storage(String name, Integer capacity) {
+    public Storage(String name, Integer capacity, Integer shelfCapacity) {
         super(name);
         this.capacity = capacity;
+        this.shelfCapacity = shelfCapacity;
     }
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
+    public void setShelfCapacity(Integer capacity) {
+        this.shelfCapacity = capacity;
+    }
+
     public Integer getCapacity() {
         return capacity;
     }
+
+    public Integer getShelfCapacity() {
+        return shelfCapacity;
+    }
+
 
 
     /**
@@ -40,17 +51,19 @@ public class Storage extends Skeleton {
             String delimeter = "\\s"; // Разделитель строки.
             subStr = newUserStorageFromConsole.split(delimeter); // Запись слов в массив.
 
-            if (subStr.length == 2) // Проверка на правильность ввода.
+            if (subStr.length == 3) // Проверка на правильность ввода.
             {
                 String wordsOrNotRegex = "[a-zA-Zа-яА-я]+"; // Regex для проверки имени склада.
-                String numbersOrNotRegex = "[\\d]+"; // Regex для проверки вместимости склада.
+                String numbersOrNotRegex = "[\\d]+"; // Regex для проверки вместимости склада и полок.
                 boolean resultWords = subStr[0].matches(wordsOrNotRegex);
-                boolean resultNumbers = subStr[1].matches(numbersOrNotRegex);
+                boolean resultCapacity = subStr[1].matches(numbersOrNotRegex);
+                boolean resultShelfCapacity = subStr[2].matches(numbersOrNotRegex);
 
-                if (resultWords == true && resultNumbers == true) // Проверка на правильность ввода.
+                if (resultWords == true && resultCapacity == true && resultShelfCapacity == true && Integer.parseInt(subStr[1]) != 0 && Integer.parseInt(subStr[2]) != 0) // Проверка на правильность ввода.
                 {
                     newStorage.setName(subStr[0]); // Установка названия для экземпляра класса.
                     newStorage.setCapacity(Integer.parseInt(subStr[1])); // Установка вместимости для экземпляра класса.
+                    newStorage.setShelfCapacity(Integer.parseInt(subStr[2])); // Установка вместимости полки для экземпляра класса.
                     break;
                 }
                 else {error();}

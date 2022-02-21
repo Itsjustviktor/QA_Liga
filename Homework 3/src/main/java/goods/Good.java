@@ -31,8 +31,14 @@ public class Good extends Skeleton {
      * Метод для добавления товара на склад.
      * В данном методе происходит ввод строки из консоли - название и количество товара.
      * Дальше она сравнивается при помощи регулярных выражений на корректность: в названии - только буквы,
-     * в количестве товара - только цифры, ввод только 2 параметров товара.
-     * Если на складе еще остались свободные полки, товар добавляется в List, иначе выводится ошибка.
+     * в количестве товара - только цифры, ввод только 2 параметров товара.<br>
+     * Случаи реализации:<br>
+     * 1) Если склад пустой. Добавление нового товара.<br>
+     * 2) Если склад не пустой. Проход по листу goodsMass с конца и поиск схожих товаров по названию на складе.<br>
+     * - Если схожий товар не найден, добавление нового товара.<br>
+     * - Если схожий товар найден, и добавляемое кол-во товара не превышет размера полки. Обновление кол-ва товара: старое + новое<br>
+     * - Если схожий товар найден, и добавляемое кол-во товара превышет размеры полки. Обновление кол-ва товара: старое + кол-во, которое можно вместить.
+     * Добавление оставшегося товара на новые полки, если этого захочет пользователь
      * @param scan сканер для реализации ввода с консоли.
      * @param goodsMass массив экземпляров класса Good
      * @param newStorage экземпляр класса Storage
@@ -65,45 +71,47 @@ public class Good extends Skeleton {
                             addGoodToMass(goodsMass, subStr, newStorage);
                             break;
                         }
+
                         else // Если склад не пустой, тогда
                         {
-                            for (int i = 0; i < goodsMass.size(); i++) // Проход по всему складу
+                            for (int i = goodsMass.size()-1; i >= 0; i--) // Проход по всему складу с конца
                             {
-                                if (goodsMass.get(i).getName().toLowerCase().equals(subStr[0].toLowerCase()) && goodsMass.get(i).getQuantity() <= 10) // Поиск схожего товара по названию, количество которого < 10 на полке
+                                if (goodsMass.get(i).getName().toLowerCase().equals(subStr[0].toLowerCase()) && goodsMass.get(i).getQuantity() <= newStorage.getShelfCapacity()) // Поиск схожего товара по названию, количество которого <= допустимого на полке
                                 {
-                                    if (goodsMass.get(i).getQuantity() + Integer.parseInt(subStr[1]) <= 10) // Если кол-во нового товара + кол-во товара на полне не превышает вместительность полки.
+                                    if (goodsMass.get(i).getQuantity() + Integer.parseInt(subStr[1]) < newStorage.getShelfCapacity()) // Если кол-во нового товара + кол-во товара на полне не превышает вместительность полки.
                                     {
                                         goodsMass.get(i).setQuantity(goodsMass.get(i).getQuantity() + Integer.parseInt(subStr[1])); // Установка нового значения.
                                         System.out.println("На складе уже есть полка для данного товара.\n" +
                                                 "Количество товара успешно обновлено!\n");
                                         break;
                                     }
-                                    else // Если кол-во нового товара + кол-во товара на полне превышает вместительность полки.
+                                    else // Если кол-во нового товара + кол-во товара на полке превышает вместительность полки.
                                     {
-                                        Integer remains = goodsMass.get(i).getQuantity() + Integer.parseInt(subStr[1]) - 10; // Узнаем оставшееся кол-во товара
-                                        goodsMass.get(i).setQuantity(10); // Пополняем старую полку с товаром до максимального значения
+                                        Integer remains = goodsMass.get(i).getQuantity() + Integer.parseInt(subStr[1]) - newStorage.getShelfCapacity(); // Узнаем оставшееся кол-во товара, которое необходимо добавить.
+                                        goodsMass.get(i).setQuantity(newStorage.getShelfCapacity()); // Пополняем старую полку с товаром до максимального значения
                                         System.out.println("На полке с данным товаром закончилось место!\n" +
                                                 "Желаете добавить оставшийся товар в количестве "+remains+" на новую(ые) полку(и)?\n" +
                                                 "1. Да\n" +
                                                 "2. Нет\n");
                                         String ramainsGoodsFromConsole = scan.nextLine();
-                                        String ramainsGoodsRegex = "[1-2]"; // Regex для проверки количества товара.
+                                        String ramainsGoodsRegex = "[1-2]"; // Regex для проверки выбора пользователя.
                                         boolean resultramainsGoods = ramainsGoodsFromConsole.matches(ramainsGoodsRegex);
+
                                         if (resultramainsGoods == true) // Проверка на правильность ввода.
                                         {
-                                            if (Integer.parseInt(ramainsGoodsFromConsole) == 1)
+                                            if (Integer.parseInt(ramainsGoodsFromConsole) == 1) // Пользователь выбрал 1 действие.
                                             {
-                                                if (remains > 10) // Если кол-во оставшегося товара больше, чем может вместить в себя 1 полка.
+                                                if (remains > newStorage.getShelfCapacity()) // Если кол-во оставшегося товара больше, чем может вместить в себя 1 полка.
                                                 {
-                                                    int withoutdot = remains/10; // Расчет целого числа полок, которых потребуется для размещения товара.
-                                                    int withdot = remains%10; // Расчет остатка, который необходимо будет поместить на новую полку.
-                                                    subStr[1] = Integer.toString(10); // Задаем кол-во товаров на каждой полной полке.
+                                                    int withoutdot = remains/newStorage.getShelfCapacity(); // Расчет целого числа полок, которых потребуется для размещения товара.
+                                                    int withdot = remains%newStorage.getShelfCapacity(); // Расчет остатка, который необходимо будет поместить на новую полку.
+                                                    subStr[1] = Integer.toString(newStorage.getShelfCapacity()); // Задаем максимальное кол-во товаров на каждой полной полке.
                                                     for (int j = 0; j < withoutdot; j++) // Добавляем полные полки на склад в кол-ве withoutdot.
                                                     {
                                                         addGoodToMass(goodsMass, subStr, newStorage);
                                                     }
-                                                    if (withdot == 0) {break;} // Если оставшееся кол-во = 0, нам не рационально создавать пустую полку, бейкуемся
-                                                    else // Если оставшееся кол-во > 0.
+                                                    if (withdot == 0) {break;} // Если оставшееся кол-во = 0, нам не рационально создавать пустую полку, брейкуемся.
+                                                    else // Если оставшееся кол-во > 0 и занимает меньше 1 полной полки.
                                                     {
                                                         subStr[1] = Integer.toString(withdot); // Задаем оставшееся кол-во товаров после полного заполнения предыдущих полок.
                                                         addGoodToMass(goodsMass, subStr, newStorage);
@@ -113,16 +121,16 @@ public class Good extends Skeleton {
                                                 else // Если кол-во оставшегося товара меньше, чем размер 1 полки
                                                 {
                                                     subStr[1] = Integer.toString(remains);
-                                                    addGoodToMass(goodsMass, subStr, newStorage);
+                                                    addGoodToMass(goodsMass, subStr, newStorage); // Добавляем 1 полку с товаром
                                                     break;
                                                 }
                                             }
-                                            if (Integer.parseInt(ramainsGoodsFromConsole) == 2) {break;} // Отмена добавления на новые полки.
+                                            if (Integer.parseInt(ramainsGoodsFromConsole) == 2) {break;} // Пользователь выбрал 2 действие. Отмена добавления на новые полки.
                                         }
                                         else {error();}
                                     }
                                 }
-                                else
+                                else // Добавляет товар, если нет схожих вхождений по названию
                                 {
                                     addGoodToMass(goodsMass, subStr, newStorage);
                                     break;
