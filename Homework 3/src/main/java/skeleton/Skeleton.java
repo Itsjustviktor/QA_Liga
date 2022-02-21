@@ -14,9 +14,8 @@ public abstract class Skeleton {
         this.name = nameToSet;
     }
 
-    public String getName(String nameToGet)
+    public String getName()
     {
-        this.name = nameToGet;
         return name;
     }
 
