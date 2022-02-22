@@ -43,10 +43,10 @@ public class Good extends Skeleton {
      * Случаи реализации:<br>
      *      * 1) Если склад пустой. Добавление нового товара.<br>
      *      * 2) Если склад не пустой. Проход по листу goodsMass с конца и поиск схожих товаров по названию на складе.<br>
-     * - Если схожий товар не найден, добавление нового товара.<br>
+     * - Если схожий товар не найден, вызов метода addMoreGood() и добавление нового товара.<br>
      * - Если схожий товар найден, и добавляемое кол-во товара не превышет размера полки. Обновление кол-ва товара: старое + новое<br>
      * - Если схожий товар найден, и добавляемое кол-во товара превышет размеры полки. Обновление кол-ва товара: старое + кол-во, которое можно вместить.
-     * Далее добавление оставшегося товара на новые полки, если этого захочет пользователь
+     * Далее вызов метода addMoreGood() добавление оставшегося товара на новые полки, если этого захочет пользователь.
      * @param scan сканер для реализации ввода с консоли.
      * @param goodsMass массив экземпляров класса Good
      * @param newStorage экземпляр класса Storage
@@ -101,28 +101,8 @@ public class Good extends Skeleton {
                                     {
                                         if (Integer.parseInt(ramainsGoodsFromConsole) == 1) // Пользователь выбрал 1 действие.
                                         {
-                                            if (remains > newStorage.getShelfCapacity()) // Если кол-во оставшегося товара больше, чем может вместить в себя одна новая полка.
-                                            {
-                                                int withoutdot = remains/newStorage.getShelfCapacity(); // Расчет целого числа полных полок, которых потребуется для размещения товара.
-                                                int withdot = remains%newStorage.getShelfCapacity(); // Расчет остатка, который необходимо будет поместить на одну новую полку.
-                                                subStr[1] = Integer.toString(newStorage.getShelfCapacity()); // Задаем максимальное кол-во товаров на каждой полной полке.
-                                                for (int j = 0; j < withoutdot; j++) // Добавляем полные полки на склад в кол-ве withoutdot.
-                                                {
-                                                    addGoodToStorage(goodsMass, subStr, newStorage);
-                                                }
-                                                if (withdot > 0) // Если оставшееся кол-во после добавления полных полок > 0 и занимает меньше одной полной полки.
-                                                {
-                                                    subStr[1] = Integer.toString(withdot); // Задаем оставшееся кол-во товаров после полного заполнения предыдущих полок.
-                                                    addGoodToStorage(goodsMass, subStr, newStorage);
-                                                    break;
-                                                }
-                                            }
-                                            else // Если кол-во оставшегося товара меньше, чем размер одной полной полки.
-                                            {
-                                                subStr[1] = Integer.toString(remains);
-                                                addGoodToStorage(goodsMass, subStr, newStorage);
-                                                break;
-                                            }
+                                            addMoreGood(remains,goodsMass,subStr,newStorage);
+                                            break;
                                         }
                                         if (Integer.parseInt(ramainsGoodsFromConsole) == 2) {break;} // Пользователь выбрал 2 действие. Отмена добавления на новые полки.
                                     }
@@ -152,28 +132,8 @@ public class Good extends Skeleton {
                                     {
                                         if (Integer.parseInt(ramainsGoodsFromConsole) == 1) // Пользователь выбрал 1 действие.
                                         {
-                                            if (remains > newStorage.getShelfCapacity()) // Если кол-во оставшегося товара больше, чем может вместить в себя одна новая полка.
-                                            {
-                                                int withoutdot = remains/newStorage.getShelfCapacity(); // Расчет целого числа полных полок, которых потребуется для размещения товара.
-                                                int withdot = remains%newStorage.getShelfCapacity(); // Расчет остатка, который необходимо будет поместить на одну новую полку.
-                                                subStr[1] = Integer.toString(newStorage.getShelfCapacity()); // Задаем максимальное кол-во товаров на каждой полной полке.
-                                                for (int j = 0; j < withoutdot; j++) // Добавляем полные полки на склад в кол-ве withoutdot.
-                                                {
-                                                    addGoodToStorage(goodsMass, subStr, newStorage);
-                                                }
-                                                if (withdot > 0) // Если оставшееся кол-во после добавления полных полок > 0 и занимает меньше одной полной полки.
-                                                {
-                                                    subStr[1] = Integer.toString(withdot); // Задаем оставшееся кол-во товаров после полного заполнения предыдущих полок.
-                                                    addGoodToStorage(goodsMass, subStr, newStorage);
-                                                    break;
-                                                }
-                                            }
-                                            else // Если кол-во оставшегося товара меньше, чем размер одной полной полки.
-                                            {
-                                                subStr[1] = Integer.toString(remains);
-                                                addGoodToStorage(goodsMass, subStr, newStorage);
-                                                break;
-                                            }
+                                            addMoreGood(remains,goodsMass,subStr,newStorage);
+                                            break;
                                         }
                                         if (Integer.parseInt(ramainsGoodsFromConsole) == 2) {break;} // Пользователь выбрал 2 действие. Отмена добавления на новые полки.
                                     }
@@ -192,10 +152,46 @@ public class Good extends Skeleton {
     }
 
     /**
-     * Метод для конечного добавления товара на склад.
-     * @param goodsMass массив экземпляров класса Good
-     * @param subStr массив значений товара (название и кол-во)
-     * @param newStorage экземпляр класса Storage
+     * Метод для добавления множества товаров на склад, добавление товаров на пустой склад.
+     * В данном метод передается массив, включающий в себя название и кол-во товара, которое ввел пользователь.
+     * Случаи реализации:<br>
+     * 1) Если кол-во товара не превышает вместимость 1 полки. Добавление нового товара на 1 полку.<br>
+     * 2) Если кол-во товара превышает вместимость 1 полки. Узнается кол-во полных полок, которые заполняются товарами. Дальше
+     * добавляется оставшийся товар на новую полку (который не превышает размер 1 полной полки).
+     * @param remains кол-во оставшегося товара, который нужно добавить.
+     * @param goodsMass массив экземпляров класса Good.
+     * @param subStr массив значений товара (название и кол-во).
+     * @param newStorage экземпляр класса Storage.
+     */
+    private static void addMoreGood(Integer remains,List<Good> goodsMass, String subStr[], Storage newStorage)
+    {
+        if (remains > newStorage.getShelfCapacity()) // Если кол-во оставшегося товара больше, чем может вместить в себя одна новая полная полка.
+        {
+            int withoutdot = remains/newStorage.getShelfCapacity(); // Расчет целого числа полных полок, которых потребуется для размещения товара.
+            int withdot = remains%newStorage.getShelfCapacity(); // Расчет остатка, который необходимо будет поместить на одну новую полку.
+            subStr[1] = Integer.toString(newStorage.getShelfCapacity()); // Задаем максимальное кол-во товаров на каждой полной полке.
+            for (int j = 0; j < withoutdot; j++) // Добавляем полные полки на склад в кол-ве withoutdot.
+            {
+                addGoodToStorage(goodsMass, subStr, newStorage);
+            }
+            if (withdot > 0) // Если оставшееся кол-во после добавления полных полок > 0 и занимает меньше одной полной полки.
+            {
+                subStr[1] = Integer.toString(withdot); // Задаем оставшееся кол-во товаров после полного заполнения предыдущих полок.
+                addGoodToStorage(goodsMass, subStr, newStorage);
+            }
+        }
+        else // Добавление товара на пустой склад или добавление невместившегося товара на новую полку.
+        {
+            subStr[1] = Integer.toString(remains);
+            addGoodToStorage(goodsMass, subStr, newStorage);
+        }
+    }
+
+    /**
+     * Метод для создания объекта класса Good и запись его в List.
+     * @param goodsMass массив экземпляров класса Good.
+     * @param subStr массив значений товара (название и кол-во).
+     * @param newStorage экземпляр класса Storage.
      */
     private static void addGoodToStorage(List<Good> goodsMass, String subStr[], Storage newStorage)
     {
@@ -216,7 +212,7 @@ public class Good extends Skeleton {
      * Дальше она сравнивается при помощи регулярного выражения на корректность: номер полки - только цифры.
      * Если вводимое значение соответствует резмеру заполненного склада, товар удаляется, иначе выводится ошибка.
      * @param scan сканер для реализации ввода с консоли.
-     * @param goodsMass массив экземпляров класса Good
+     * @param goodsMass массив экземпляров класса Good.
      */
     public static void deleteGood(Scanner scan, List<Good> goodsMass)
     {
