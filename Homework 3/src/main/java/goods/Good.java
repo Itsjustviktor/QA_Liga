@@ -165,7 +165,7 @@ public class Good extends Skeleton {
      */
     private static void addMoreGood(Integer remains,List<Good> goodsMass, String subStr[], Storage newStorage)
     {
-        if (remains > newStorage.getShelfCapacity()) // Если кол-во оставшегося товара больше, чем может вместить в себя одна новая полная полка.
+        if (remains > newStorage.getShelfCapacity()) // Если кол-во оставшегося или добавляемого товара больше, чем может вместить в себя одна новая полная полка.
         {
             int withoutdot = remains/newStorage.getShelfCapacity(); // Расчет целого числа полных полок, которых потребуется для размещения товара.
             int withdot = remains%newStorage.getShelfCapacity(); // Расчет остатка, который необходимо будет поместить на одну новую полку.
@@ -180,7 +180,7 @@ public class Good extends Skeleton {
                 addGoodToStorage(goodsMass, subStr, newStorage);
             }
         }
-        else // Добавление товара на пустой склад или добавление невместившегося товара на новую полку.
+        else // Добавление товара на пустой склад или добавление невместившегося товара на новую полку, еол-во которой не превышает >1.
         {
             subStr[1] = Integer.toString(remains);
             addGoodToStorage(goodsMass, subStr, newStorage);
