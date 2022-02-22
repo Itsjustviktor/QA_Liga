@@ -17,22 +17,37 @@ public class Storage extends Skeleton {
         this.shelfCapacity = shelfCapacity;
     }
 
+    /**
+     * Метод для установки значения вместимости склада (кол-во полок).
+     * @param capacity передаваемое значение вместимости склада (кол-во полок).
+     */
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
+    /**
+     * Метод для установки значения вместимости 1 полки.
+     * @param capacity передаваемое значение вместимости 1 полки.
+     */
     public void setShelfCapacity(Integer capacity) {
         this.shelfCapacity = capacity;
     }
 
+    /**
+     * Метод получения значения вместимости склада (кол-во полок).
+     * @return возвращение значения вместимости склада (кол-во полок).
+     */
     public Integer getCapacity() {
         return capacity;
     }
 
+    /**
+     * Метод получения значения вместимости 1 полки.
+     * @return возвращение значения вместимости 1 полки.
+     */
     public Integer getShelfCapacity() {
         return shelfCapacity;
     }
-
 
 
     /**

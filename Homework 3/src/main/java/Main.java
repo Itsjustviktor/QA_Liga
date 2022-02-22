@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Storage newStorage = new Storage("", null, null);
-        Good newGood = new Good("",null);
+        Storage newStorage = new Storage("", 0, 0);
+        Good newGood = new Good("",0);
 
         String user = System.getenv("USERNAME"); // Получение имени пользователя
         System.out.println("Приветвую вас, "+user+"!\nПожалуйста введите название, размер вашего склада и размер полки через пробел");
