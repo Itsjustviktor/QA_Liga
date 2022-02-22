@@ -112,7 +112,7 @@ public class Good extends Skeleton {
 
                             else // Добавляет уникальный товар, если нет схожих вхождений по названию.
                             {
-                                if (Integer.parseInt(subStr[1]) < newStorage.getCapacity()) // Добавление уникального товара на полку, если его кол-во не превышает размер одной полки.
+                                if (Integer.parseInt(subStr[1]) <= newStorage.getShelfCapacity()) // Добавление уникального товара на полку, если его кол-во не превышает размер одной полки.
                                 {
                                     addGoodToStorage(goodsMass, subStr, newStorage);
                                     break;
