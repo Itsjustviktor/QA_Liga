@@ -214,7 +214,7 @@ public class Good extends Skeleton {
      * @param scan сканер для реализации ввода с консоли.
      * @param goodsMass массив экземпляров класса Good.
      */
-    public static void deleteGood(Scanner scan, List<Good> goodsMass)
+    private static void deleteGood(Scanner scan, List<Good> goodsMass)
     {
         while (true)
         {
