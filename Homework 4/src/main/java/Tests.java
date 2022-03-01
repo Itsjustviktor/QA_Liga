@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,7 +14,7 @@ public class Tests {
         //test_4();
         //test_5();
         //test_6();
-        //test_7();
+        test_7();
         //test_8();
         //test_9();
     }
@@ -105,12 +104,31 @@ public class Tests {
      * 6. IMAGE
      */
     public static void test_7() {
-        List<WebElement> elements = getElements();
-        List<WebElement> elements1 = new ArrayList<>();
-        elements1 = elements.stream()
+       List<WebElement> elements = getElements();
+       List<WebElement> elPriority = new ArrayList<>();
+
+        elPriority = elements.stream()
                 .peek(x -> x.setDisplayed(!x.isDisplayed()))
-                .collect(toList());
-        elements1.forEach(v->System.out.println(v.getType()+ " " + v.isDisplayed()));
+                .sorted(Comparator.comparing(x-> {
+                    return x.getType() == Type.TEXT;
+                }))
+                .sorted(Comparator.comparing(x-> {
+                    return x.getType() == Type.INPUT_FIELD;
+                }))
+                .sorted(Comparator.comparing(x-> {
+                    return x.getType() == Type.CHECKBOX;
+                }))
+                .sorted(Comparator.comparing(x-> {
+                    return x.getType() == Type.BUTTON;
+                }))
+                .sorted(Comparator.comparing(x-> {
+                    return x.getType() == Type.RADIO_BUTTON;
+                }))
+                .sorted(Comparator.comparing(x-> {
+                    return x.getType() == Type.IMAGE;
+                }))
+                .collect(Collectors.toList());
+        elPriority.forEach(v->System.out.println(v.getType()+ " " + v.isDisplayed()));
     }
 
     /**
