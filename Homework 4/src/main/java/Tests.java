@@ -1,3 +1,4 @@
+import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,9 +13,9 @@ public class Tests {
         //test_2();
         //test_3();
         //test_4();
-        //test_5();
+        test_5();
         //test_6();
-        test_7();
+        //test_7();
         //test_8();
         //test_9();
     }
@@ -73,13 +74,15 @@ public class Tests {
      * и так далее.
      */
     public static void test_5() {
-        Map<Integer, String> map = getMap();
-        List<Map.Entry<Integer, String>> mapEntrie = new ArrayList<>(map.entrySet());
-        Collections.shuffle(mapEntrie);
-
-        mapEntrie.stream()
-                .forEach(v -> System.out.println("Элемент "+ Integer.valueOf(mapEntrie.indexOf(v)+1)+
-                        ": "+ "ключ - "+v.getKey()+", значение \""+v.getValue()+ "\""));
+        Map<Integer, String> map = getMap(); //Заполнение мапы
+        Map<Integer, String> newShuffleMap =
+                map.entrySet().stream()
+                        .collect(toMap(
+                        k -> k.getKey(),
+                        v -> v.getValue(),
+                        (k1, k2) -> k1, IdentityHashMap::new));
+        newShuffleMap.forEach(
+                (k, v) -> System.out.println("Ключ - "+ k +", значение \""+v+"\""));
     }
 
     /**
