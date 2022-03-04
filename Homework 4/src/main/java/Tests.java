@@ -74,15 +74,11 @@ public class Tests {
      * и так далее.
      */
     public static void test_5() {
-        Map<Integer, String> map = getMap(); //Заполнение мапы
-        Map<Integer, String> newShuffleMap =
-                map.entrySet().stream()
-                        .collect(toMap(
-                        k -> k.getKey(),
-                        v -> v.getValue(),
-                        (k1, k2) -> k1, IdentityHashMap::new));
-        newShuffleMap.forEach(
-                (k, v) -> System.out.println("Ключ - "+ k +", значение \""+v+"\""));
+        Map<Integer, String> map = getMap();
+        map.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEach(System.out::println);
     }
 
     /**
