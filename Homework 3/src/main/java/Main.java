@@ -1,5 +1,6 @@
 import goods.Good;
 import storages.Storage;
+import export.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +8,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        Excel excel = new Excel("Склад","C:\\bd\\Products.xls");
         Scanner scan = new Scanner(System.in);
         Storage newStorage = new Storage("", 0, 0);
         Good newGood = new Good("",0);
@@ -25,10 +27,11 @@ public class Main {
                     "1 - добавить товар на склад\n" +
                     "2 - удалить товар со склада\n" +
                     "3 - посмотреть товары на складе\n" +
-                    "4 - Выйти из программы");
+                    "4 - экспорт товаров на складе в excel\n" +
+                    "5 - Выйти из программы");
 
             String choice = scan.nextLine();
-            String numbersFrom1To4Regex = "[1-4]"; // Regex для проверки ввода числа выбора.
+            String numbersFrom1To4Regex = "[1-5]"; // Regex для проверки ввода числа выбора.
             boolean resultNumbers = choice.matches(numbersFrom1To4Regex);
 
             if (resultNumbers == true)
@@ -46,6 +49,10 @@ public class Main {
                     newStorage.showStorageWithGoods(goods);
                 }
                 if (Integer.parseInt(choice) == 4)
+                {
+                    excel.newExcel(goods);
+                }
+                if (Integer.parseInt(choice) == 5)
                 {
                     System.exit(0);
                 }
