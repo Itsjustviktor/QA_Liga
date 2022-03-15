@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Homework TestNG">
+    <test name="First TestBlock">
+        <classes>
+            <class name="TestBlock0"/>
+        </classes>
+    </test>
+    <test name="Second TestBlock">
+        <classes>
+            <class name="TestBlock1"/>
+        </classes>
+    </test>
+    <test name="Third TestBlock">
+        <classes>
+            <class name="TestBlock2"/>
+        </classes>
+    </test>
+    <test name="Fourth TestBlock">
+        <classes>
+            <class name="TestBlock3"/>
+        </classes>
+    </test>
+</suite>
