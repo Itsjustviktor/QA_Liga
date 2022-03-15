@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Excel excel = new Excel("Склад","C:\\bd\\Products.xls");
+        Excel excel = new Excel("Склад","C:\\Exceles\\Products.xls");
         Scanner scan = new Scanner(System.in);
         Storage newStorage = new Storage("", 0, 0);
         Good newGood = new Good("",0);

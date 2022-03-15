@@ -53,6 +53,7 @@ public class Excel{
             System.out.println("На складе нет ни одного товара, таблица не может быть создана.");
         }
         else {
+            try {
             for (int i = 0; i < goods.size(); i++) {
                 row = sheet.createRow((int) i + 1);
                 row.createCell(0).setCellValue(goods.get(i).getName());
@@ -60,6 +61,11 @@ public class Excel{
             }
             workbook.write(new FileOutputStream(getPath()));
             System.out.println("Excel файл успешно создан!");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Упс, скорее всего вы неправильно указали путь для файла(");
+            }
         }
     }
 }
