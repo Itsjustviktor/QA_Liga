@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="468e982e-9bb1-4e67-afb5-ccc8e11ce3ff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897083207.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897462460.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897462460.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897585695.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897585695.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897616090.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897616090.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958259213.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958259213.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958314111.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958314111.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647961409424.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647961409424.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648023242342.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648023242342.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648030607073.0.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648030607073.0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid10760.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid13044.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid15848.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid18580.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid8348.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/replay_pid18580.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FiltersPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GoodPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Steps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Homework 2/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Homework 2/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Homework 3/src/main/java/export/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Homework 3/src/main/java/export/Excel.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="26hQ1PQDvebCJcz06IDYIvmCQ10" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager" selected="TestNG.Tests.a">
+    <configuration name="Steps.a" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Homework 7" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Steps" />
+      <option name="METHOD_NAME" value="a" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.a" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Homework 7" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="a" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.test" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Homework 7" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.Tests.a" />
+        <item itemvalue="TestNG.Steps.a" />
+        <item itemvalue="TestNG.Tests.test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="468e982e-9bb1-4e67-afb5-ccc8e11ce3ff" name="Changes" comment="" />
+      <created>1647873124093</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1647873124093</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Tests.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
