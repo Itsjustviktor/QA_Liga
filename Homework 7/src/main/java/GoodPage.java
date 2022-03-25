@@ -4,7 +4,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class GoodPage {
 
@@ -15,6 +15,7 @@ public class GoodPage {
     private SelenideElement addToComparisonButton;
 
     private ElementsCollection paginationLinks = $$x("//li[contains(@class, 'page-item')]");
+    private ElementsCollection productContainers = $$x("//div[contains(@class, 'product-cards-row')]");
 
     private final String XPATH_TITLE_LINE_CONTAINER = "//div[contains(@class, 'product-card__title-line-container')]";
     private final String XPATH_NESTED_NAME_LINK = "[mvid-plp-product-title[.//a[text() = ' %s ']]]";
@@ -63,6 +64,9 @@ public class GoodPage {
         return addToFavoritesButton;
     }
 
+    /**
+     * Метод, который кликает на слудеющую страницу.
+     */
     public void clickToNextPage() {
         if (paginationLinks.last().exists()) {
             paginationLinks
@@ -74,15 +78,30 @@ public class GoodPage {
         }
     }
 
-    public void findProductCard(String filterName) {
-        while (paginationLinks.last().exists()) {
-        if (getProductCard(filterName).getProductTitle().isDisplayed()) {
-            getProductCard(filterName)
+    /**
+     * Метод для прогрузки товаров на странице.
+     */
+    public void showProducts(){
+        productContainers
+                .asDynamicIterable()
+                .forEach(ele -> ele.scrollIntoView("{block: \"center\"}"));
+    }
+
+    /**
+     * Метод для поиска товара на всех страницах.
+     * @param productName название товара.
+     */
+    public void findProductCard(String productName) {
+        do{
+        showProducts();
+        if (getProductCard(productName).getProductTitle().isDisplayed()) {
+            getProductCard(productName)
                     .getProductTitle()
                     .shouldBe(Condition.visible)
                     .scrollIntoView("{block: \"center\"}");
             break;
         } else {clickToNextPage();}}
+        while (paginationLinks.last().exists());
     }
 }
 

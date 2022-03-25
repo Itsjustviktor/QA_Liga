@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -6,43 +7,62 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.Objects;
 
+import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class FiltersPage {
 
     private static FiltersPage filtersPage;
 
-    @FindBy(xpath = "//mvid-button[contains(@class, 'listing-view-switcher__button--grid')]//button[contains(@class, 'button')]")
+    /**
+     * Кнопка переключения вида на таблицу.
+     */
+    @FindBy(xpath = "//mvid-button[contains(@class, 'listing-view-switcher__button--grid')]" +
+            "//child::mvid-icon[@class = 'listing-view-switcher__button-icon ng-star-inserted']")
     private SelenideElement gridButton;
-    @FindBy(xpath = "//div[contains(@class, 'listing-view-switcher__pointer--grid')]")
-    private SelenideElement gridChecker;
 
+    /**
+     * Контейнер для всех фильтров.
+     */
     @FindBy(xpath = "//div[contains(@class, 'filter-container__filters-row')]")
     private SelenideElement allFiltersContainer;
 
+    /**
+     * Лоадер для перекрытия товаров при загрузке.
+     */
     private SelenideElement loader = $x("//div[@class='skeleton']");
 
     private String xpathFilter = "//div[contains(@class, 'accordion__container')][contains(.,'%s')]";
+    /**
+     * Контейнер конкретного фильтра.
+     */
     private SelenideElement filter;
 
     private String xpathChecboxesContainer = "//div[contains(@class, 'filter-checkbox-list__container')]";
+    /**
+     * Контейнер со всеми чекбоксами. Если filter закрыт, контейнер не отображается.
+     */
     private SelenideElement checboxesContainer;
 
     private String xpathCheckbox = "//div[@class = 'checkbox'][contains(.,'%s')]";
+    /**
+     * Конкретный чекбокс.
+     */
     private SelenideElement checkbox;
 
-    private String xpathShowAllButton =  "//p[contains(@class,'show-all ng-star-inserted')]";
-    private SelenideElement showAllButton;
+    /**
+     * Коллекция со всеми кнопками "Показать ещё".
+     */
+    private ElementsCollection showAllButtons = $$x("//p[contains(.,'Показать ещё')]");
 
     private String xpathToggleButton = "//mvid-switcher[contains(.,'%s')]";
+    /**
+     * Конкретный toggle button.
+     */
     private SelenideElement toggleButton;
 
     public SelenideElement getGridButton() {
         return gridButton;
-    }
-
-    public SelenideElement getgridChecker() {
-        return gridChecker;
     }
 
     public SelenideElement getAllFiltersContainer() {
@@ -70,17 +90,10 @@ public class FiltersPage {
         return checkbox;
     }
     public void setCheckbox(String checkboxName) {
-        this.checkbox = getChecboxesContainer()
-                        .find(By.xpath(
-                                toStringFormat(".", xpathCheckbox, checkboxName)));
-    }
-
-    public SelenideElement getShowAllButton() {
-        return showAllButton;
-    }
-    public void setShowAllButton(){
-        this.showAllButton = getFilter()
-                .find(By.xpath("." + xpathShowAllButton));
+        this.checkbox = $x(toStringFormat("",xpathCheckbox,checkboxName));
+//        this.checkbox = getChecboxesContainer()
+//                        .find(By.xpath(
+//                                toStringFormat(".", xpathCheckbox, checkboxName)));
     }
 
     public SelenideElement getToggleButton() {
@@ -96,13 +109,14 @@ public class FiltersPage {
         return loader;
     }
 
+
+
     public FiltersPage() {
     }
     public static FiltersPage getFiltersPage() {
         if (Objects.isNull(filtersPage)) filtersPage = Selenide.page(new FiltersPage());
         return filtersPage;
     }
-
 
     /**
      * Преобразование xpath в стринг, если требуется подстановка какого либо значения.
@@ -117,76 +131,57 @@ public class FiltersPage {
     }
 
     /**
-     * Проверка текущего отображения товаров.
-     * @return true, если отображение таблицей, false, если отображение листом.
-     */
-    private boolean checkCurrentView()
-    {
-        return getgridChecker().isDisplayed();
-    };
-
-    /**
-     * Инициализация веб элементов.
-     * @param filterName имя фильтра.
-     * @param checkboxName имя чекбокса.
-     */
-    private void initializeWebElements(String filterName, String checkboxName)
-    {
-        setFilter(filterName);
-        setChecboxesContainer();
-        setCheckbox(checkboxName);
-        setShowAllButton();
-    };
-
-    /**
      * Переключение вида товаров на таблицу.
      */
     public void switchViewToGrid()
     {
-        if(checkCurrentView() == false) {
+        if(getGridButton().isDisplayed() == true) {
             getGridButton()
                     .shouldBe(Condition.visible)
-                    .click();}
-    }
-
-    /**
-     * Открытие(нажатие) фильтра, если фильтр закрыт.
-     * @param filterName имя фильтра.
-     * @param checkboxName имя чекбокса.
-     */
-    public void openFilter(String filterName, String checkboxName)
-    {
-        initializeWebElements(filterName, checkboxName); // Первичная инициализация.
-        if (getChecboxesContainer().isDisplayed() == false){
-            getFilter()
-                .shouldBe(Condition.visible)
-                .scrollIntoView("{block: \"center\"}")
-                .click();
-            initializeWebElements(filterName, checkboxName);} // Вторичная инициализация, если фильтр был закрыт.
-    }
-
-    /**
-     * Нажатие на кнопку "Показать еще", если она присутствует в фильтре.
-     */
-    public void showAllCheckboxes()
-    {
-        SelenideElement showAllButton = getShowAllButton();
-            if (showAllButton.isDisplayed() == true){
-                showAllButton
-                    .shouldBe(Condition.visible)
                     .scrollIntoView("{block: \"center\"}")
-                    .shouldBe(Condition.visible)
                     .click();
             getLoader().shouldBe(Condition.disappear);}
     }
 
     /**
+     * Открытие(нажатие) фильтра, если фильтр закрыт.
+     * @param filterName имя фильтра.
+     */
+    public void openFilter(String filterName) {
+        setFilter(filterName);
+        setChecboxesContainer();
+
+        if (getChecboxesContainer().isDisplayed() == false) {
+            getFilter()
+                    .shouldBe(Condition.visible)
+                    .scrollIntoView("{block: \"center\"}")
+                    .click();
+            setChecboxesContainer();
+        }
+    }
+
+    /**
+     * Нажатие на кнопки "Показать еще" для полного раскрытия всех фильтов.
+     */
+    public void showAllCheckboxes()
+    {
+        while(showAllButtons.last().exists())
+        showAllButtons.asDynamicIterable()
+                .forEach(button -> button.scrollIntoView("{block: \"center\"}")
+                                            .shouldBe(Condition.visible)
+                                            .click());
+    }
+
+    /**
      * Нажатие на чекбокс.
      */
-    public void selectCheckboxFilter()
+    public void selectCheckboxFilter(String checkboxName)
     {
-        if(getCheckbox().isDisplayed() == true) {
-            getCheckbox()
+        setCheckbox(checkboxName);
+        SelenideElement checkbox = getCheckbox();
+
+        if(checkbox.isDisplayed() == true) {
+            checkbox
                     .shouldBe(Condition.visible)
                     .scrollIntoView("{block: \"center\"}")
                     .click();
@@ -201,6 +196,7 @@ public class FiltersPage {
     {
         setToggleButton(toggleButtonName);
         SelenideElement toggleButton = getToggleButton();
+
         if (toggleButton.isDisplayed() == true){
             toggleButton
                     .shouldBe(Condition.visible)
@@ -209,8 +205,6 @@ public class FiltersPage {
             getLoader().shouldBe(Condition.disappear);
         }
     }
-
-
 }
 
 

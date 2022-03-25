@@ -5,41 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="468e982e-9bb1-4e67-afb5-ccc8e11ce3ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897083207.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897462460.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897462460.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897585695.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897585695.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897616090.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647897616090.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958259213.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958259213.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958314111.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647958314111.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647961409424.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1647961409424.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648023242342.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648023242342.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648030607073.0.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/tests/1648030607073.0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hs_err_pid10760.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hs_err_pid13044.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hs_err_pid15848.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hs_err_pid18580.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hs_err_pid8348.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/replay_pid18580.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/FiltersPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/GoodPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Steps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Tests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Homework 2/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Homework 2/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Homework 3/src/main/java/export/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Homework 3/src/main/java/export/Excel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/replay_pid18580.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FiltersPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FiltersPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GoodPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GoodPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Steps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Steps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FiltersPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FiltersPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GoodPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GoodPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Steps.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Steps.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Tests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Tests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,16 +120,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Tests.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
