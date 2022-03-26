@@ -18,7 +18,8 @@ public class FiltersPage {
      * Кнопка переключения вида на таблицу.
      */
     @FindBy(xpath = "//mvid-button[contains(@class, 'listing-view-switcher__button--grid')]" +
-            "//child::mvid-icon[@class = 'listing-view-switcher__button-icon ng-star-inserted']")
+            "//child::mvid-icon[contains(@class,'listing-view-switcher__button-icon') " +
+            "and not(contains(@class, 'listing-view-switcher__button-icon--selected'))]")
     private SelenideElement gridButton;
 
     /**

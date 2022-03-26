@@ -5,18 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="468e982e-9bb1-4e67-afb5-ccc8e11ce3ff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Final project/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/src/main/java/CartPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/src/main/java/GoodPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/src/main/java/HeaderPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/src/main/java/MainPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/src/main/java/Steps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/src/test/java/Tests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/target/classes/CartPage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/target/classes/GoodPage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/target/classes/HeaderPage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/target/classes/MainPage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/target/classes/Steps.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Final project/target/test-classes/Tests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Homework 2/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Homework 2/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Homework 3/src/main/java/export/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Homework 3/src/main/java/export/Excel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/replay_pid18580.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FiltersPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FiltersPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GoodPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GoodPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Steps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Steps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FiltersPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FiltersPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GoodPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GoodPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Steps.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Steps.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Tests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Tests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +44,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/testng/testng/7.5/testng-7.5.jar!/org/testng/TestNG.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/com/codeborne/selenide-core/6.3.5/selenide-core-6.3.5-sources.jar!/com/codeborne/selenide/impl/SelenideElementProxy.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/testng/testng/7.5/testng-7.5.jar!/org/testng/internal/invokers/MethodInvocationHelper.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/com/codeborne/selenide/6.0.1/selenide-6.0.1.jar!/com/codeborne/selenide/Selenide.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/testng/testng/7.5/testng-7.5.jar!/org/testng/internal/invokers/TestInvoker.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/testng/testng/7.5/testng-7.5.jar!/org/testng/internal/TestResult.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="26hQ1PQDvebCJcz06IDYIvmCQ10" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
