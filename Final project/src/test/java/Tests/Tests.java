@@ -66,10 +66,10 @@ public class Tests {
     public void addTwoGoodsFromMostViewedGoodsToCart(){
         stepsMostViewedGoods.mostViewedGoodsContainerIsDisplayed();
         stepsMostViewedGoods.addGoodToCart("Смартфон Xiaomi Redmi Note 11 NFC 4GB+128GB Twilight Blue");
-        stepsMostViewedGoods.addGoodToFavorite("Смартфон Xiaomi Redmi Note 11 NFC 4GB+128GB Twilight Blue");
-        stepsMostViewedGoods.addGoodToCompare("Ноутбук Acer Aspire 3 A315-34-C9WH NX.HE3ER.01V");
+        stepsMostViewedGoods.addGoodToCart("Планшет HUAWEI MatePad T10 (2021) 2+32GB Wi-Fi Blue (AGRK-W09)");
         stepsHeaderPage.clickOnCartButton();
-
+        stepsCartPage.checkAddedGoodAndExistedGood(stepsMostViewedGoods.addedGoods());
+        stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
     }
 
     @Test (priority = 7)

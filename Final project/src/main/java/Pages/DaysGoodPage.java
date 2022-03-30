@@ -26,14 +26,13 @@ public class DaysGoodPage {
 
     @FindBy(xpath = "//mvid-day-product[contains(@class, 'main') and contains(@class, 'product')]")
     private SelenideElement daysGoodContainer;
-
-    Map<String, Integer> rememberDaysGoodNameMap = new HashMap<>();
+    Map<String, Integer> rememberDaysGoodsMap = new HashMap<>();
 
     private SelenideElement getDaysGoodContainer() {
         return daysGoodContainer;
     }
-    public Map<String, Integer> getRememberedNameOfDaysGoodMap() {
-        return rememberDaysGoodNameMap;
+    public Map<String, Integer> getRememberDaysGoodsMap() {
+        return rememberDaysGoodsMap;
     }
 
     private DaysGoodPage() {}
@@ -73,7 +72,7 @@ public class DaysGoodPage {
                                         .find(By.xpath("." + xpathGoodPrice))
                                         .getText()
                                         .replace(" ",""));
-        getRememberedNameOfDaysGoodMap().put(goodsName, goodsPrice);
+        getRememberDaysGoodsMap().put(goodsName, goodsPrice);
     }
 
 }

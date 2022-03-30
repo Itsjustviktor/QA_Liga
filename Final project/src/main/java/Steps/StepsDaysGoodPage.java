@@ -35,7 +35,7 @@ public class StepsDaysGoodPage {
      * @return map добавленных товаров.
      */
     public Map<String, Integer> addedGoods (){
-        return daysGoodPage.getRememberedNameOfDaysGoodMap();
+        return daysGoodPage.getRememberDaysGoodsMap();
     }
 
 }
