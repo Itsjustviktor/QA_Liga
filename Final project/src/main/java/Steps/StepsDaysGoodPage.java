@@ -24,9 +24,10 @@ public class StepsDaysGoodPage {
      * Добавленный(ые) товар(ы) дня в корзину.
      */
     public void daysGoodAddToCart() {
-        if (daysGoodPage.daysGoodIsDisplayed() == true){
-        daysGoodPage.daysGoodAddToCart();
-        daysGoodPage.rememberGood();}
+        if (daysGoodPage.daysGoodIsDisplayed()){
+            daysGoodPage.daysGoodAddToCart();
+            daysGoodPage.rememberGood();
+        }
         else System.out.println("Товар не отображается, добавление невозможно.");
     }
 

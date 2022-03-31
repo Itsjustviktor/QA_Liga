@@ -2,6 +2,7 @@ package Steps;
 
 import Pages.AuthorizationPage;
 import Pages.DaysGoodPage;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 
 public class StepsAuthorizationPage {

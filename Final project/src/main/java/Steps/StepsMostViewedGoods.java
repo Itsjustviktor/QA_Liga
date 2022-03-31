@@ -11,36 +11,32 @@ public class StepsMostViewedGoods {
         mostViewedGoods = MostViewedGoodsPage.getMostViewedGoods();
     }
 
+    /**
+     * Проверка отображения блока "Самые просматриваемые".
+     */
     public void mostViewedGoodsContainerIsDisplayed(){
         mostViewedGoods.showAllContainers();
-        Assert.assertTrue(mostViewedGoods.mostViewedGoodsContainerIsDisplayed(), "f");
+        Assert.assertTrue(mostViewedGoods.mostViewedGoodsContainerIsDisplayed(),
+                "Блок \"Самые просматриваемые\" не отображается");
     }
 
+    /**
+     * Добавление товара в корзину.
+     * @param goodsName наименование товара.
+     */
     public void addGoodToCart(String goodsName){
-        mostViewedGoods.scrollToMostViewedGoodsContainer();
-        mostViewedGoods.setGood(goodsName);
-        if(mostViewedGoods.addGoodToCartIsInactive()){
-        mostViewedGoods.addGoodToCart();
-        mostViewedGoods.rememberGood();}
-        else System.out.println("Товар уже находится в корзине.");
-    }
-
-    public void addGoodToFavorite(String goodsName){
-        mostViewedGoods.scrollToMostViewedGoodsContainer();
-        mostViewedGoods.setGood(goodsName);
-        if(mostViewedGoods.addGoodToFavoriteIsInactive()){
-        mostViewedGoods.addGoodToFavorite();
-        mostViewedGoods.rememberGood();}
-        else System.out.println("Товар уже находится в избранном.");
-    }
-
-    public void addGoodToCompare(String goodsName){
-        mostViewedGoods.scrollToMostViewedGoodsContainer();
-        mostViewedGoods.setGood(goodsName);
-        if(mostViewedGoods.addGoodToCompareIsInactive()){
-        mostViewedGoods.addGoodToFavorite();
-        mostViewedGoods.rememberGood();}
-        else System.out.println("Товар уже находится в сравнении.");
+        mostViewedGoods.scrollToMostViewedGoodsContainer(); // Прокрутка к блоку "Самые просматриваемые".
+        mostViewedGoods.setGood(goodsName); // Поиск товара.
+        if(mostViewedGoods.goodIsExist()){ // Если товар существует.
+            if(mostViewedGoods.addGoodToCartIsInactive()){ // Если товар не находится в корзине.
+            mostViewedGoods.addGoodToCart(); // Добавление товара в корзину.
+            mostViewedGoods.rememberGood(); // Запоминание товара в map.
+            }
+            else Assert.assertTrue(mostViewedGoods.addGoodToCartIsInactive(),
+                    "Товар уже находится в корзине.");
+        }
+        else Assert.assertTrue(mostViewedGoods.goodIsExist(),
+                "Товар не существует.");
     }
 
     /**

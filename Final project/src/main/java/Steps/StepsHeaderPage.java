@@ -1,5 +1,6 @@
 package Steps;
 
+import Pages.GoodsPage;
 import Pages.HeaderPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.commands.As;
@@ -38,11 +39,31 @@ public class StepsHeaderPage {
     }
 
     /**
+     * Нажатие на кнопку "Сравнение"
+     */
+    public void clickOnСompareButton(){
+        if (headerPage.compareButtonIsDisplayed() && headerPage.compareButtonIsEnabled())
+            headerPage.clickOnFavoritesButton();
+        else Assert.assertTrue(headerPage.compareButtonIsDisplayed() && headerPage.compareButtonIsEnabled(),
+                "Кнопка \"Сравнение\" не отображается или неактивна.");
+    }
+
+    /**
      * Кнопка "Избранное" отображается и неактивна.
      */
     public void favoritesButtonIsDisplayedAndIsDisabled() {
         Assert.assertTrue(headerPage.favoritesButtonIsDisplayed() && headerPage.favoritesButtonIsDisabled(),
                 "Кнопка \"Избранное\" не отображается или активна.");
+    }
+
+    /**
+     * Нажатие на кнопку "Избранное"
+     */
+    public void clickOnFavoriteButton(){
+        if (headerPage.favoritesButtonIsDisplayed() && headerPage.favoritesButtonIsEnabled())
+            headerPage.clickOnFavoritesButton();
+        else Assert.assertTrue(headerPage.favoritesButtonIsDisplayed() && headerPage.favoritesButtonIsEnabled(),
+                "Кнопка \"Избранное\" не отображается или неактивна.");
     }
 
     /**
@@ -63,12 +84,23 @@ public class StepsHeaderPage {
     }
 
     /**
+     * Нажатие на кнопку "Корзина"
+     */
+    public void clickOnCartButton(){
+        if (headerPage.cartButtonIsDisplayed() && headerPage.cartButtonIsEnabled())
+            headerPage.clickOnCartButton();
+        else Assert.assertTrue(headerPage.cartButtonIsDisplayed() && headerPage.cartButtonIsEnabled(),
+                "Кнопка \"Корзина\" не отображается или неактивна.");
+    }
+
+    /**
      * Нажатие на кнопку выбора города.
      */
     public void clickOnLocationButton(){
-        if (headerPage.locationButtonIsDisplayed() == true)
+        if (headerPage.locationButtonIsDisplayed())
         headerPage.clickOnLocationButton();
-        else System.out.println("Кнопка с выбором города не отображается.");
+        else Assert.assertTrue(headerPage.locationButtonIsDisplayed(),
+                "Кнопка с выбором города не отображается.");
     }
 
     /**
@@ -85,18 +117,33 @@ public class StepsHeaderPage {
      * Нажатие на кнопку "Войти"
      */
     public void clickOnProfileButton(){
-        if (headerPage.profileButtonIsDisplayed() && headerPage.profileButtonIsEnabled() == true)
+        if (headerPage.profileButtonIsDisplayed() && headerPage.profileButtonIsEnabled())
             headerPage.clickOnProfileButton();
-        else System.out.println("Кнопка \"Войти\" не отображается или неактивна.");
+        else Assert.assertTrue(headerPage.profileButtonIsDisplayed() && headerPage.profileButtonIsEnabled(),
+                "Кнопка \"Войти\" не отображается или неактивна.");
+    }
+
+
+    /**
+     * Вставка названия товара в окно поиска.
+     * @param goodsName название товара.
+     */
+    public void inputTextInInputField(String goodsName){
+        headerPage.inputTextInInputField(goodsName);
     }
 
     /**
-     * Нажатие на кнопку "Корзина"
+     * Нажатие на кнопку поиска.
      */
-    public void clickOnCartButton(){
-        if (headerPage.cartButtonIsDisplayed() && headerPage.cartButtonIsEnabled() == true)
-            headerPage.clickOnCartButton();
-        else System.out.println("Кнопка \"Корзина\" не отображается или неактивна.");
+    public void clickOnSearchButton(){
+        headerPage.clickOnSearchButton();
     }
 
+    /**
+     * Поле ввода названия товара активно.
+     */
+    public void inputTextInInputFieldIsDisplayed(){
+        Assert.assertTrue(headerPage.inputTextInInputFieldIsDisplayed(),
+                "Строка поиска товаров не отображается.");
+    }
 }

@@ -45,7 +45,6 @@ public class CartPage {
     private SelenideElement getExpectedSummOfGoods() {
         return expectedSummOfGoods;
     }
-
     public Map<String, Integer> getCartsGood() {
         return cartsGood;
     }

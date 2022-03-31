@@ -139,6 +139,23 @@ public class HeaderPage {
     }
 
     /**
+     * Кнопка "Сравнение" активна.
+     * @return true - активна, false - не активна.
+     */
+    public boolean compareButtonIsEnabled() {
+        return getCompareButton()
+                .find(By.xpath("." + xpathEnabledStatus))
+                .isDisplayed();
+    }
+
+    /**
+     * Нажатие на кнопку "Сравнение".
+     */
+    public void clickOnСompareButton(){
+        getCompareButton().click();
+    }
+
+    /**
      * Отображение кнопки "Избранное".
      * @return true - отображается, false - не отображается.
      */
@@ -154,6 +171,23 @@ public class HeaderPage {
         return getFavoritesButton()
                 .find(By.xpath("." + xpathDisabledStatus))
                 .isDisplayed();
+    }
+
+    /**
+     * Кнопка "Избранное" активна.
+     * @return true - активна, false - не активна.
+     */
+    public boolean favoritesButtonIsEnabled() {
+        return getFavoritesButton()
+                .find(By.xpath("." + xpathEnabledStatus))
+                .isDisplayed();
+    }
+
+    /**
+     * Нажатие на кнопку "Ибранное".
+     */
+    public void clickOnFavoritesButton(){
+        getFavoritesButton().click();
     }
 
     /**
@@ -210,9 +244,19 @@ public class HeaderPage {
      */
     public void inputTextInInputField(String text) {
         getInputContainer()
-                .find(By.xpath(xpathInputField))
+                .find(By.xpath("." + xpathInputField))
                 .shouldBe(Condition.visible)
                 .setValue(text);
+    }
+
+    /**
+     * Cтрока поиска отображается.
+     * @return true - отображается, false - не отображается.
+     */
+    public boolean inputTextInInputFieldIsDisplayed() {
+        return getInputContainer()
+                .find(By.xpath("." + xpathInputField))
+                .isDisplayed();
     }
 
     /**
@@ -220,7 +264,7 @@ public class HeaderPage {
      */
     public void clickOnSearchButton() {
         getInputContainer()
-                .find(By.xpath(xpathSearchButton))
+                .find(By.xpath("." + xpathSearchButton))
                 .shouldBe(Condition.visible)
                 .click();
     }

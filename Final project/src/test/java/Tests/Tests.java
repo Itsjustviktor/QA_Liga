@@ -13,6 +13,7 @@ public class Tests {
     StepsAuthorizationPage stepsAuthorizationPage;
     StepsCartPage stepsCartPage;
     StepsMostViewedGoods stepsMostViewedGoods;
+    StepsGoodsPage stepsGoodsPage;
 
     @BeforeTest
     public void settingsBeforeTests(){
@@ -25,6 +26,7 @@ public class Tests {
         stepsAuthorizationPage = new StepsAuthorizationPage();
         stepsCartPage = new StepsCartPage();
         stepsMostViewedGoods = new StepsMostViewedGoods();
+        stepsGoodsPage = new StepsGoodsPage();
     }
 
     @AfterClass
@@ -80,6 +82,21 @@ public class Tests {
         stepsAuthorizationPage.phoneInputFieldIsDisplayed();
         stepsAuthorizationPage.сontinueButtonIsDisplayedAndIsDisabled();
         stepsAuthorizationPage.buttonForLawPersonsIsDisplayed();
+    }
+
+    @Test (priority = 8)
+    public void checkAddedGoodToCompareList(){
+        stepsHeaderPage.inputTextInInputFieldIsDisplayed();
+        stepsHeaderPage.inputTextInInputField("apple");
+        stepsHeaderPage.clickOnSearchButton();
+        stepsGoodsPage.addGoodToFavorite(0);
+        //stepsGoodsPage.addGoodToFavorite(1);
+        stepsGoodsPage.addGoodToCompare(1);
+//        stepsGoodsPage.addGoodToCompare("Смартфон Apple iPhone 11 64GB Black (MHDA3RU/A)");
+       // stepsHeaderPage.clickOnСompareButton();
+//        stepsGoodsPage.addGoodToCompare("Смартфон Apple iPhone 11 64GB White (MHDC3RU/A)");
+
+
     }
 
     @Test (priority = 10)

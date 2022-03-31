@@ -27,7 +27,7 @@ public class MostViewedGoodsPage {
     private SelenideElement mostViewedGoodsContainer;
     private SelenideElement good;
     private ElementsCollection containers = $$x("//mvid-simple-product-collection-mp");
-    Map<String, Integer> rememberMostViewedGoodsMap = new HashMap<>();
+    private Map<String, Integer> rememberMostViewedGoodsMap = new HashMap<>();
 
     public void setGood(String goodsName) {
         this.good = $x(formatXpath("", xpathGoodsTittle, goodsName));
@@ -53,7 +53,7 @@ public class MostViewedGoodsPage {
     }
 
     /**
-     * Блок прогрузка контейнеров с товарами отображается.
+     * Прогрузка блоков контейнеров.
      */
     public void showAllContainers(){
         getContainers().asDynamicIterable()
@@ -71,9 +71,21 @@ public class MostViewedGoodsPage {
                 .isDisplayed();
     }
 
+    /**
+     * Прокрутка к блоку "Самые просматриваемые".
+     */
     public void scrollToMostViewedGoodsContainer(){
         getMostViewedGoodsContainer().scrollIntoView("{block: \"center\"}");
         Selenide.sleep(200);
+    }
+
+
+    /**
+     * Товар существует.
+     * @return true - существует, false - не существует.
+     */
+    public boolean goodIsExist(){
+        return getGood().exists();
     }
 
     /**
@@ -91,47 +103,13 @@ public class MostViewedGoodsPage {
      * @return true - не добавлен, false - добавлен.
      */
     public boolean addGoodToCartIsInactive(){
-        return getGood().find(By.xpath("."+ xpathGoodsCartButton)).getAttribute("title").equals("Добавить в корзину");
+        return getGood().find(By.xpath("."+ xpathGoodsCartButton))
+                            .getAttribute("title")
+                            .equals("Добавить в корзину");
     }
 
     /**
-     * Нажатие на кнопку добавления в избранное.
-     */
-    public void addGoodToFavorite(){
-        getGood().find(By.xpath("."+ xpathGoodsFavoriteButton))
-                .scrollIntoView("{block: \"center\"}")
-                .click();
-        Selenide.sleep(1000);
-    }
-
-    /**
-     * Проверка добавлен ли этот товар в избранное.
-     * @return true - добавлен, false - не добавлен.
-     */
-    public boolean addGoodToFavoriteIsInactive(){
-        return getGood().find(By.xpath("."+ xpathGoodsFavoriteButton)).getAttribute("title").equals("Добавить в избранное");
-    }
-
-    /**
-     * Нажатие на кнопку добавления в избранное.
-     */
-    public void addGoodToCompare(){
-        getGood().find(By.xpath("."+ xpathGoodsCompareButton))
-                .scrollIntoView("{block: \"center\"}")
-                .click();
-        Selenide.sleep(1000);
-    }
-
-    /**
-     * Проверка добавлен ли этот товар в сравнение.
-     * @return true - добавлен, false - не добавлен.
-     */
-    public boolean addGoodToCompareIsInactive(){
-        return getGood().find(By.xpath("."+ xpathGoodsCompareButton)).getAttribute("title").equals("Добавить в сравнение");
-    }
-
-    /**
-     * Запоминание в map название и цену товара дня.
+     * Запоминание в map название и цену добавляемого товара.
      */
     public void rememberGood(){
         String goodsName = getGood()
