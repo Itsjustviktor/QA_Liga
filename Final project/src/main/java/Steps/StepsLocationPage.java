@@ -16,10 +16,10 @@ public class StepsLocationPage {
      * @param city город.
      */
     public void selectCity(String city) {
-        if(locationPage.cityIsExist(city) == true)
+        if (locationPage.cityIsExist(city))
             locationPage.selectCity(city);
-        else
-            System.out.println("Города нет в списке!");
+        else Assert.assertTrue(locationPage.cityIsExist(city),
+                    "Города нет в списке!");
     }
 
     /**

@@ -9,10 +9,8 @@ import java.util.Map;
 public class StepsCartPage {
 
     private CartPage cartPage;
-    private DaysGoodPage daysGoodPage;
     public StepsCartPage() {
         cartPage = CartPage.getCartPage();
-        daysGoodPage = DaysGoodPage.getDaysGoodPage();
     }
 
     /**
@@ -37,16 +35,16 @@ public class StepsCartPage {
      * @param addedGoods map добавленных товаров.
      */
     public void checkAddedGoodAndExistedGood(Map<String, Integer> addedGoods){
-        if(cartPage.cartIsntEmpty() == false) {
+        if(!cartPage.cartIsntEmpty()) {
             cartPage.rememberGoodsNameAndPriceInCart(); //Получение товаров из корзины.
-                if(checkMapsSizes(addedGoods) == true) {
+                if(checkMapsSizes(addedGoods)) {
                     Assert.assertTrue(cartPage.compareGoodsNameAndPrice(addedGoods),
                             "Карточки добавленных товаров не соответствуют карточкам товаров в корзине");}
-                else {
-                    System.out.println("Кол-во добавленных товаров и кол-во товаров в корзине не совпадают!");}
+                else Assert.assertTrue(checkMapsSizes(addedGoods),
+                        "Кол-во добавленных товаров и кол-во товаров в корзине не совпадают!");
         }
-        else {
-            System.out.println("Корзина пуста!");}
+        else Assert.assertFalse(cartPage.cartIsntEmpty(),
+                "Корзина пуста!");
     }
 
     /**

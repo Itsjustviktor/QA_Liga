@@ -11,19 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static Formatters.XpathFormatter.formatXpath;
-import static com.codeborne.selenide.Selenide.$$x;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class GoodsPage {
     private static GoodsPage goodsPage;
-
-
-    private String xpathGoodsTittle = "//div[contains(@class, 'product-card__title-line-container')]" +
-            "[contains(.,'%s')]";
-
-    @FindBy(xpath = "//div[contains(@class, 'product-card__title-line-container')]")
-    private ElementsCollection tittlesCollection;
 
     private String xpathGoodsFinalPrice = "//following::span[contains(@class, 'price__main-value')][1]";
     private String xpathGoodsFavoriteButton = "//following::div[contains(@class, 'wishlist-button-block')][1]" +
@@ -31,9 +21,11 @@ public class GoodsPage {
     private String xpathGoodsCompareButton = "//following::div[contains(@class, 'compare-button-block')][1]" +
             "//button[contains(@class, 'button')][1]";
 
+    @FindBy(xpath = "//div[contains(@class, 'product-card__title-line-container')]")
+    private ElementsCollection tittlesCollection;
     @FindBy (xpath = "//mvid-skeleton")
     private SelenideElement loader;
-    @FindBy(xpath = "//div[contains(@class, 'product-cards-row')])")
+    @FindBy(xpath = "//div[contains(@class, 'product-cards-row')]")
     private ElementsCollection productContainers;
     private Map<String, Integer> rememberFavoriteGoodsMap = new HashMap<>();
     private Map<String, Integer> rememberCompareGoodsMap = new HashMap<>();
@@ -74,7 +66,7 @@ public class GoodsPage {
      * Возращение кол-ва товаров на странице.
      * @return кол-ва товаров на странице
      */
-    public Integer quantityOfTittles() {
+    public Integer quantityOfGoods() {
         return getTittlesCollection().size();
     }
 

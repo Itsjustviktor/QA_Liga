@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.Configuration;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import static Formatters.UrlChecker.urlChecker;
 
 public class Tests {
     StepsHeaderPage stepsHeaderPage;
@@ -14,6 +15,8 @@ public class Tests {
     StepsCartPage stepsCartPage;
     StepsMostViewedGoods stepsMostViewedGoods;
     StepsGoodsPage stepsGoodsPage;
+    StepsFavoritePage stepsFavoritePage;
+    StepsComparePage stepsComparePage;
 
     @BeforeTest
     public void settingsBeforeTests(){
@@ -27,6 +30,8 @@ public class Tests {
         stepsCartPage = new StepsCartPage();
         stepsMostViewedGoods = new StepsMostViewedGoods();
         stepsGoodsPage = new StepsGoodsPage();
+        stepsFavoritePage = new StepsFavoritePage();
+        stepsComparePage = new StepsComparePage();
     }
 
     @AfterClass
@@ -56,7 +61,7 @@ public class Tests {
         stepsDaysGoodPage.daysGoodIsDisplayed();
         stepsDaysGoodPage.daysGoodAddToCart();
         stepsHeaderPage.clickOnCartButton();
-        stepsCartPage.checkCurrentPage("/cart");
+        urlChecker("/cart");
         stepsCartPage.headerMyCartIsDisplayed();
         stepsCartPage.checkAddedGoodAndExistedGood(stepsDaysGoodPage.addedGoods());
         stepsCartPage.continueButtonIsDisplayed();
@@ -89,14 +94,27 @@ public class Tests {
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
-        stepsGoodsPage.addGoodToFavorite(0);
-        //stepsGoodsPage.addGoodToFavorite(1);
+        urlChecker("/product-list-page");
         stepsGoodsPage.addGoodToCompare(1);
-//        stepsGoodsPage.addGoodToCompare("Смартфон Apple iPhone 11 64GB Black (MHDA3RU/A)");
-       // stepsHeaderPage.clickOnСompareButton();
-//        stepsGoodsPage.addGoodToCompare("Смартфон Apple iPhone 11 64GB White (MHDC3RU/A)");
+        stepsGoodsPage.addGoodToCompare(2);
+        stepsGoodsPage.addGoodToCompare(3);
+        stepsHeaderPage.clickOnСompareButton();
+        urlChecker("/product-comparison");
+        stepsComparePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToCompare());
+    }
 
-
+    @Test (priority = 9)
+    public void checkAddedGoodToFavoriteList(){
+        stepsHeaderPage.inputTextInInputFieldIsDisplayed();
+        stepsHeaderPage.inputTextInInputField("apple");
+        stepsHeaderPage.clickOnSearchButton();
+        urlChecker("/product-list-page");
+        stepsGoodsPage.addGoodToFavorite(1);
+        stepsGoodsPage.addGoodToFavorite(2);
+        stepsGoodsPage.addGoodToFavorite(3);
+        stepsHeaderPage.clickOnFavoriteButton();
+        urlChecker("/wish-list");
+        stepsFavoritePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToFavorite());
     }
 
     @Test (priority = 10)

@@ -43,8 +43,9 @@ public class StepsHeaderPage {
      */
     public void clickOnСompareButton(){
         if (headerPage.compareButtonIsDisplayed() && headerPage.compareButtonIsEnabled())
-            headerPage.clickOnFavoritesButton();
-        else Assert.assertTrue(headerPage.compareButtonIsDisplayed() && headerPage.compareButtonIsEnabled(),
+            headerPage.clickOnСompareButton();
+        else
+            Assert.assertTrue(headerPage.compareButtonIsDisplayed() && headerPage.compareButtonIsEnabled(),
                 "Кнопка \"Сравнение\" не отображается или неактивна.");
     }
 

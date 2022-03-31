@@ -1,6 +1,7 @@
 package Steps;
 
 import Pages.DaysGoodPage;
+import com.codeborne.selenide.commands.As;
 import org.testng.Assert;
 
 import java.util.Map;
@@ -28,7 +29,8 @@ public class StepsDaysGoodPage {
             daysGoodPage.daysGoodAddToCart();
             daysGoodPage.rememberGood();
         }
-        else System.out.println("Товар не отображается, добавление невозможно.");
+        else Assert.assertTrue(daysGoodPage.daysGoodIsDisplayed()
+                ,"Товар не отображается, добавление невозможно.");;
     }
 
     /**

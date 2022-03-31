@@ -49,6 +49,8 @@ public class HeaderPage {
     @FindBy (xpath = "//div[contains(@class, 'app-header-top')]" +
             "//child::div[contains(@class, 'location')]")
     private SelenideElement locationButton;
+    @FindBy (xpath = "//div[contains(@class, 'tooltip__item')]")
+    private SelenideElement popupWindow;
 
     private SelenideElement getCompareButton() {
         return compareButton;
@@ -67,6 +69,9 @@ public class HeaderPage {
     }
     private SelenideElement getLocationButton() {
         return locationButton;
+    }
+    private SelenideElement getPopupWindow() {
+        return popupWindow;
     }
 
     private HeaderPage() {}
@@ -297,5 +302,12 @@ public class HeaderPage {
         return getLocationButton()
                 .find(By.xpath(formatXpath(".", xpathSelectedCity, city)))
                 .isDisplayed();
+    }
+
+    /**
+     * Ожидание сокрытия окна с товарами при добавлении в избранное, сравнение, корзину.
+     */
+    public void popupWindowShouldBeHidden(){
+        getPopupWindow().shouldBe(Condition.hidden);
     }
 }

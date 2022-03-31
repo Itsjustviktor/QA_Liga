@@ -1,7 +1,6 @@
 package Pages;
 
 import com.codeborne.selenide.*;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,7 +14,7 @@ public class CartPage {
     /**
      * Xpath для поиска названия товара.
      */
-    private String xpathHeader = "//a[contains(@class,'c-cart-item__title')]";
+    private String xpathTittle = "//a[contains(@class,'c-cart-item__title')]";
     /**
      * Xpath для поиска последней цены (с учетом скидок и прочего).
      */
@@ -31,8 +30,9 @@ public class CartPage {
     private SelenideElement expectedSummOfGoods;
     private ElementsCollection goodsContainers = $$x("//div[contains(@class, 'c-cart-item__wrapper ')]");
 
-    Map<String, Integer> cartsGood = new LinkedHashMap<>();
+    Map<String, Integer> cartsGoods = new LinkedHashMap<>();
 
+    private ElementsCollection getGoodsContainers() {return goodsContainers;}
     private SelenideElement getHeaderMyCart() {
         return headerMyCart;
     }
@@ -45,8 +45,8 @@ public class CartPage {
     private SelenideElement getExpectedSummOfGoods() {
         return expectedSummOfGoods;
     }
-    public Map<String, Integer> getCartsGood() {
-        return cartsGood;
+    private Map<String, Integer> getCartsGoods() {
+        return cartsGoods;
     }
 
 
@@ -79,7 +79,7 @@ public class CartPage {
      * @return true - пуста, false - не пуста.
      */
     public boolean cartIsntEmpty(){
-        return goodsContainers.isEmpty();
+        return getGoodsContainers().isEmpty();
     }
 
     /**
@@ -87,17 +87,17 @@ public class CartPage {
      * @return кол-во товаров в корзине.
      */
     public Integer getCartSize(){
-        return goodsContainers.size();
+        return getGoodsContainers().size();
     }
 
     /**
      * Запоминание товаров, лежащих в корзине, в map.
      */
     public void rememberGoodsNameAndPriceInCart() {
-        goodsContainers.asDynamicIterable().forEach(
+        getGoodsContainers().asDynamicIterable().forEach(
                 selenideElement -> {
-                    cartsGood.put(
-                            selenideElement.find(By.xpath("." + xpathHeader))
+                    getCartsGoods().put(
+                            selenideElement.find(By.xpath("." + xpathTittle))
                                     .getText(),
                             Integer.parseInt(selenideElement.find(By.xpath("." + xpathLastPrice))
                                     .getText()
@@ -115,7 +115,7 @@ public class CartPage {
      * @return true - maps совпадают, false - не совпадают.
      */
     public boolean compareGoodsNameAndPrice(Map<String, Integer> receivedGoods){
-        return  cartsGood.entrySet()
+        return getCartsGoods().entrySet()
                 .stream()
                 .allMatch(entry -> receivedGoods.containsKey(entry.getKey()) && receivedGoods.containsValue(entry.getValue()));
     }
@@ -155,7 +155,7 @@ public class CartPage {
     public Integer realSummOfGoods(){
         Integer realSummOfGoods = 0;
 
-        for (SelenideElement selenideElement:goodsContainers.asDynamicIterable()) {
+        for (SelenideElement selenideElement:getGoodsContainers().asDynamicIterable()) {
             realSummOfGoods += Integer.parseInt(selenideElement.find(By.xpath("." + xpathLastPrice))
                     .getText()
                     .replace(" ","")
