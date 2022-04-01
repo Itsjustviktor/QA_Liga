@@ -17,6 +17,7 @@ public class Tests {
     StepsGoodsPage stepsGoodsPage;
     StepsFavoritePage stepsFavoritePage;
     StepsComparePage stepsComparePage;
+    StepsFiltersPage stepsFiltersPage;
 
     @BeforeTest
     public void settingsBeforeTests(){
@@ -32,6 +33,7 @@ public class Tests {
         stepsGoodsPage = new StepsGoodsPage();
         stepsFavoritePage = new StepsFavoritePage();
         stepsComparePage = new StepsComparePage();
+        stepsFiltersPage = new StepsFiltersPage();
     }
 
     @AfterClass
@@ -77,6 +79,27 @@ public class Tests {
         stepsHeaderPage.clickOnCartButton();
         stepsCartPage.checkAddedGoodAndExistedGood(stepsMostViewedGoods.addedGoods());
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
+    }
+
+    @Test (priority = 5)
+    public void findGoods(){
+        stepsHeaderPage.inputTextInInputFieldIsDisplayed();
+        stepsHeaderPage.inputTextInInputField("apple");
+        stepsHeaderPage.clickOnSearchButton();
+        urlChecker("/product-list-page");
+        stepsGoodsPage.goodsContainName("apple");
+    }
+
+    @Test (priority = 6)
+    public void sortGoodsOnList(){
+        stepsHeaderPage.inputTextInInputFieldIsDisplayed();
+        stepsHeaderPage.inputTextInInputField("apple");
+        stepsHeaderPage.clickOnSearchButton();
+        urlChecker("/product-list-page");
+        stepsGoodsPage.goodsContainName("apple");
+        stepsFiltersPage.filterMostFavoriteIsDisplayed();
+        stepsFiltersPage.clickOnFirstIsMoreExpensiveButton();
+        stepsGoodsPage.goodsPriceDecreases();
     }
 
     @Test (priority = 7)

@@ -155,7 +155,7 @@ public class CartPage {
     public Integer realSummOfGoods(){
         Integer realSummOfGoods = 0;
 
-        for (SelenideElement selenideElement:getGoodsContainers().asDynamicIterable()) {
+        for (SelenideElement selenideElement : getGoodsContainers().asDynamicIterable()) {
             realSummOfGoods += Integer.parseInt(selenideElement.find(By.xpath("." + xpathLastPrice))
                     .getText()
                     .replace(" ","")

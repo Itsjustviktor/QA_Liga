@@ -70,4 +70,16 @@ public class StepsGoodsPage {
         return goodsPage.getRememberCompareGoodsMap();
     }
 
+    public void goodsContainName(String goodsName){
+        goodsPage.loaderShouldBeDisappear();
+        goodsPage.showProducts();
+        Assert.assertTrue(goodsPage.goodsContainName(goodsName), "Не все товары содержат название \""+goodsName+"\"");
+    }
+
+    public void goodsPriceDecreases(){
+        goodsPage.loaderShouldBeDisappear();
+        goodsPage.showProducts();
+        Assert.assertTrue(goodsPage.goodsPriceDecreases(),
+                "Товары расположены не по убыванию цен");
+    }
 }

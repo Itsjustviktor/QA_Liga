@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -161,5 +162,51 @@ public class GoodsPage {
                         .replace("₽", ""));
         getRememberCompareGoodsMap().put(goodsName, goodsPrice);
     }
+
+    /**
+     * Проверка содержат ли все товары определенное слово в названии.
+     * @param name название.
+     * @return true - содержат, false - не содержат.
+     */
+    public boolean goodsContainName(String name){
+        boolean elementContainsNameIsTrue = true;
+        for (SelenideElement selenideElement : getTittlesCollection().asDynamicIterable()) {
+            boolean elementThatContainsName = selenideElement.find(By.xpath(".//a"))
+                    .getText()
+                    .toLowerCase()
+                    .replace("&nbsp;", " ")
+                    .contains(name.toLowerCase());
+            if (!elementThatContainsName) elementContainsNameIsTrue = false;
+        }
+        return elementContainsNameIsTrue;
+    }
+
+
+    /**
+     * Проверка располагаются ли товары на странице по убыванию цены.
+     * @return true - сортировка соответствует, false - сортировка не соответствует.
+     */
+    public boolean goodsPriceDecreases(){
+        boolean goodsPriceDecreasesIsTrue = true;
+        boolean currentGoodsPriceMoreThenNextPrice;
+        for (int i = 0; i < getTittlesCollection().size()-1; i++){
+                currentGoodsPriceMoreThenNextPrice = Integer.parseInt(getTittlesCollection().get(i)
+                        .find(By.xpath("." + xpathGoodsFinalPrice))
+                        .getText()
+                        .replace(" ","")
+                        .replace("₽", ""))
+                    >=
+                        Integer.parseInt(getTittlesCollection().get(i+1)
+                                .find(By.xpath("." + xpathGoodsFinalPrice))
+                                .getText()
+                                .replace(" ","")
+                                .replace("₽", ""));
+                if (!currentGoodsPriceMoreThenNextPrice) goodsPriceDecreasesIsTrue = false;
+            }
+        return goodsPriceDecreasesIsTrue;
+    }
+
+
+
 
 }
