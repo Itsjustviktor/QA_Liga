@@ -30,26 +30,20 @@ public class MostViewedGoodsPage {
     private ElementsCollection goodsTittleCollections = $$x (xpathMostViewedGoodsContainer + "//div[contains(@class, 'product-mini-card__name')]");
     @FindBy (xpath = "//mvid-simple-product-collection-mp")
     private ElementsCollection containers;
-    private SelenideElement forwardButton = $x(xpathMostViewedGoodsContainer + xpathForwardButton);
-    private SelenideElement backwardButton = $x(xpathMostViewedGoodsContainer + xpathBackwardButton);
-
     private Map<String, Integer> rememberMostViewedGoodsMap = new HashMap<>();
 
     private ElementsCollection getContainers() {
         return containers;
     }
+
     private SelenideElement getMostViewedGoodsContainer() {
         return mostViewedGoodsContainer;
     }
-    private SelenideElement getForwardButton() {
-        return forwardButton;
-    }
-    private SelenideElement getBackwardButton() {
-        return backwardButton;
-    }
+
     private ElementsCollection getTittlesCollection() {
         return goodsTittleCollections;
     }
+
     public Map<String, Integer> getRememberMostViewedGoodsMap() {
         return rememberMostViewedGoodsMap;
     }
@@ -79,13 +73,6 @@ public class MostViewedGoodsPage {
                 .isDisplayed();
     }
 
-    /**
-     * Прокрутка к блоку "Самые просматриваемые".
-     */
-    public void scrollToMostViewedGoodsContainer(){
-        getMostViewedGoodsContainer().scrollIntoView("{block: \"center\"}");
-        Selenide.sleep(300);
-    }
 
     /**
      * Возращение кол-ва товаров на странице.
@@ -135,34 +122,6 @@ public class MostViewedGoodsPage {
                         .replace(" ","")
                         .replace("₽", ""));
         getRememberMostViewedGoodsMap().put(goodsName, goodsPrice);
-    }
-
-    public boolean tittleIsDisplayed(Integer goodsPosition){
-        return getTittlesCollection().get(goodsPosition).isDisplayed();
-    }
-
-    public boolean forwardButtonIsDisplayed(){
-        return getForwardButton()
-                .scrollIntoView("{block: \"center\"}")
-                .isDisplayed();
-    }
-
-    public void forwardButtonClick(){
-        getForwardButton()
-                .scrollIntoView("{block: \"center\"}")
-                .click();
-    }
-
-    public boolean backwardButtonIsDisplayed(){
-        return getBackwardButton()
-                .scrollIntoView("{block: \"center\"}")
-                .isDisplayed();
-    }
-
-    public void backwardButtonClick(){
-        getBackwardButton()
-                .scrollIntoView("{block: \"center\"}")
-                .click();
     }
 
 }

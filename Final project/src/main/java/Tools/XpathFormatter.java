@@ -1,4 +1,4 @@
-package Formatters;
+package Tools;
 
 public class XpathFormatter {
     public static String formatXpath(String dot, String rawPath, Object... args) {

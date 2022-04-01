@@ -3,11 +3,8 @@ package Tests;
 import Steps.*;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
-import org.testng.Assert;
 import org.testng.annotations.*;
-import static Formatters.UrlChecker.urlChecker;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static Tools.UrlChecker.urlChecker;
 
 public class Tests {
     StepsHeaderPage stepsHeaderPage;
@@ -44,8 +41,7 @@ public class Tests {
         Selenide.closeWebDriver();
     }
 
-
-    @Test (priority = 1, testName = "Проверка кнопок шапки mvideo")
+    @Test (testName = "Проверка кнопок шапки mvideo")
     public void checkMvideoHeader(){
         stepsHeaderPage.ordersStatusButtonIsDisplayedAndIsEnabled();
         stepsHeaderPage.profileButtonIsDisplayedAndIsEnabled();
@@ -54,53 +50,53 @@ public class Tests {
         stepsHeaderPage.favoritesButtonIsDisplayedAndIsDisabled();
     }
 
-    @Test (priority = 2, testName = "Проверка активации кнопки корзины")
+    @Test (testName = "Проверка активации кнопки корзины")
     public void checkCartButtonIsActive(){
         stepsDaysGoodPage.daysGoodIsDisplayed();
         stepsDaysGoodPage.daysGoodAddToCart();
         stepsHeaderPage.cartButtonIsEnabledAndContainsGood(1);
     }
 
-    @Test (priority = 3, testName = "Проверка перехода в корзину и правильность ее отображения")
+    @Test (testName = "Проверка перехода в корзину и правильность ее отображения")
     public void checkCartThatContainsGood(){
         stepsDaysGoodPage.daysGoodIsDisplayed();
         stepsDaysGoodPage.daysGoodAddToCart();
         stepsHeaderPage.clickOnCartButton();
-        urlChecker("/cart");
         stepsCartPage.headerMyCartIsDisplayed();
+        urlChecker("/cart");
         stepsCartPage.checkAddedGoodAndExistedGood(stepsDaysGoodPage.addedGoods());
         stepsCartPage.continueButtonIsDisplayed();
         stepsCartPage.headerThatContainsQuantityGoodsIsDisplayed();
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
     }
 
-    @Test (priority = 4, testName = "Проверка добавления 2 товаров в корзину и правильность ее отображения")
+    @Test (testName = "Проверка добавления 2 товаров в корзину и правильность ее отображения")
     public void addTwoGoodsFromMostViewedGoodsToCart(){
         stepsMostViewedGoods.mostViewedGoodsContainerIsDisplayed();
-        stepsMostViewedGoods.addGoodToCart1(15);
-        //stepsMostViewedGoods.addGoodToCart1(2);
+        stepsMostViewedGoods.addGoodToCart(1);
+        stepsMostViewedGoods.addGoodToCart(2);
         stepsHeaderPage.clickOnCartButton();
         stepsCartPage.checkAddedGoodAndExistedGood(stepsMostViewedGoods.addedGoods());
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
     }
 
-    @Test (priority = 5, testName = "Проверка поиска товаров")
+    @Test (testName = "Проверка поиска товаров")
     public void findGoods(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
-        urlChecker("/product-list-page");
         stepsGoodsPage.loadGoodsPage();
+        urlChecker("/product-list-page");
         stepsGoodsPage.goodsContainName("apple");
     }
 
-    @Test (priority = 6, testName = "Проверка сортировки товаров")
+    @Test (testName = "Проверка сортировки товаров")
     public void sortGoodsOnList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
-        urlChecker("/product-list-page");
         stepsGoodsPage.loadGoodsPage();
+        urlChecker("/product-list-page");
         stepsGoodsPage.goodsContainName("apple");
         stepsFiltersPage.filterMostFavoriteIsDisplayed();
         stepsFiltersPage.clickOnFirstIsMoreExpensiveButton();
@@ -108,7 +104,7 @@ public class Tests {
         stepsGoodsPage.goodsPriceDecreases();
     }
 
-    @Test (priority = 7, testName = "Проверка модального окна авторизации клиента")
+    @Test (testName = "Проверка модального окна авторизации клиента")
     public void checkAuthorizationWindow(){
         stepsHeaderPage.clickOnProfileButton();
         stepsAuthorizationPage.modalWindowIsDisplayed();
@@ -118,13 +114,13 @@ public class Tests {
         stepsAuthorizationPage.buttonForLawPersonsIsDisplayed();
     }
 
-    @Test (priority = 8, testName = "Проверка добавления товаров в список сравнения")
+    @Test (testName = "Проверка добавления товаров в список сравнения")
     public void checkAddedGoodToCompareList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
-        urlChecker("/product-list-page");
         stepsGoodsPage.loadGoodsPage();
+        urlChecker("/product-list-page");
         stepsGoodsPage.addGoodToCompare(1);
         stepsGoodsPage.addGoodToCompare(2);
         stepsGoodsPage.addGoodToCompare(3);
@@ -133,13 +129,13 @@ public class Tests {
         stepsComparePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToCompare());
     }
 
-    @Test (priority = 9, testName = "Проверка добавления товаров в список избранных")
+    @Test (testName = "Проверка добавления товаров в список избранных")
     public void checkAddedGoodToFavoriteList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
-        urlChecker("/product-list-page");
         stepsGoodsPage.loadGoodsPage();
+        urlChecker("/product-list-page");
         stepsGoodsPage.addGoodToFavorite(1);
         stepsGoodsPage.addGoodToFavorite(2);
         stepsGoodsPage.addGoodToFavorite(3);
@@ -148,7 +144,7 @@ public class Tests {
         stepsFavoritePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToFavorite());
     }
 
-    @Test (priority = 10, testName = "Проверка изменения города")
+    @Test (testName = "Проверка изменения города")
     public void checkChangeCity(){
        stepsHeaderPage.clickOnLocationButton();
        stepsLocationPage.modalWindowIsDisplayed();

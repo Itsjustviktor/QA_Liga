@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import java.util.Objects;
-import static Formatters.XpathFormatter.formatXpath;
+import static Tools.XpathFormatter.formatXpath;
 
 public class HeaderPage {
     private static HeaderPage headerPage;
