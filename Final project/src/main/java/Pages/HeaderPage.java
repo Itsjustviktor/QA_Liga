@@ -35,6 +35,10 @@ public class HeaderPage {
      * Xpath для нахождения текущего выбранного города.
      */
     private String xpathSelectedCity = "//span[text() = '%s']";
+    /**
+     * Xpath для нахождения bubble, который содержит определенное кол-во товаров
+     */
+    private String xpathBubbleCartWithSomeGoods = "//mvid-bubble[contains(.,%d)]";
 
     @FindBy (xpath = "//div[contains(@class, 'tab-profile')]")
     private SelenideElement profileButton;
@@ -51,6 +55,11 @@ public class HeaderPage {
     private SelenideElement locationButton;
     @FindBy (xpath = "//div[contains(@class, 'tooltip__item')]")
     private SelenideElement popupWindow;
+    /**
+     * Локатор на главный header. Используется для отвода курсора.
+     */
+    @FindBy (xpath = "//div[contains(@class,'app-header-top')]")
+    private SelenideElement headerPlug;
 
     private SelenideElement getCompareButton() {
         return compareButton;
@@ -72,6 +81,13 @@ public class HeaderPage {
     }
     private SelenideElement getPopupWindow() {
         return popupWindow;
+    }
+    /**
+     * Возвращает элемент header. Используется для отвода курсора.
+     * @return элемент header
+     */
+    public SelenideElement getHeaderPlug() {
+        return headerPlug;
     }
 
     private HeaderPage() {}
@@ -231,7 +247,7 @@ public class HeaderPage {
      */
     public boolean checkToCartContainsOneGood(Integer quantity){
         return getCartButton()
-                .find(By.xpath(formatXpath(".", "//mvid-bubble[contains(.,%d)]", quantity)))
+                .find(By.xpath(formatXpath(".", xpathBubbleCartWithSomeGoods, quantity)))
                 .shouldBe(Condition.visible)
                 .isDisplayed();
     }

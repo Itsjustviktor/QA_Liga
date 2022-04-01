@@ -87,6 +87,7 @@ public class Tests {
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
         urlChecker("/product-list-page");
+        stepsGoodsPage.loadGoodsPage();
         stepsGoodsPage.goodsContainName("apple");
     }
 
@@ -96,9 +97,11 @@ public class Tests {
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
         urlChecker("/product-list-page");
+        stepsGoodsPage.loadGoodsPage();
         stepsGoodsPage.goodsContainName("apple");
         stepsFiltersPage.filterMostFavoriteIsDisplayed();
         stepsFiltersPage.clickOnFirstIsMoreExpensiveButton();
+        stepsGoodsPage.loadGoodsPage();
         stepsGoodsPage.goodsPriceDecreases();
     }
 
@@ -118,6 +121,7 @@ public class Tests {
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
         urlChecker("/product-list-page");
+        stepsGoodsPage.loadGoodsPage();
         stepsGoodsPage.addGoodToCompare(1);
         stepsGoodsPage.addGoodToCompare(2);
         stepsGoodsPage.addGoodToCompare(3);
@@ -132,6 +136,7 @@ public class Tests {
         stepsHeaderPage.inputTextInInputField("apple");
         stepsHeaderPage.clickOnSearchButton();
         urlChecker("/product-list-page");
+        stepsGoodsPage.loadGoodsPage();
         stepsGoodsPage.addGoodToFavorite(1);
         stepsGoodsPage.addGoodToFavorite(2);
         stepsGoodsPage.addGoodToFavorite(3);

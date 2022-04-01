@@ -6,6 +6,8 @@ import org.testng.Assert;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.actions;
+
 public class StepsGoodsPage {
     private GoodsPage goodsPage;
     private HeaderPage headerPage;
@@ -19,13 +21,12 @@ public class StepsGoodsPage {
      * @param elementGood позиция товара на странице.
      */
     public void addGoodToFavorite(Integer elementGood){
-        goodsPage.loaderShouldBeDisappear();
-        goodsPage.showProducts();
         if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){
             if(goodsPage.addGoodToFavoriteIsInactive(elementGood-1)){
-                headerPage.popupWindowShouldBeHidden();
                 goodsPage.addGoodToFavorite(elementGood-1);
                 goodsPage.rememberFavoriteGood(elementGood-1);
+                actions().moveToElement(headerPage.getHeaderPlug()).perform();
+                headerPage.popupWindowShouldBeHidden();
             }
             else Assert.assertTrue(goodsPage.addGoodToFavoriteIsInactive(elementGood-1),
                     "Товар уже находится в избранном.");
@@ -39,13 +40,12 @@ public class StepsGoodsPage {
      * @param elementGood позиция товара на странице.
      */
     public void addGoodToCompare(Integer elementGood){
-        goodsPage.loaderShouldBeDisappear();
-        goodsPage.showProducts();
         if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){
             if(goodsPage.addGoodToCompareIsInactive(elementGood-1)){
                 goodsPage.addGoodToCompare(elementGood-1);
                 goodsPage.rememberCompareGood(elementGood-1);
-//                headerPage.popupWindowShouldBeHidden();
+                actions().moveToElement(headerPage.getHeaderPlug()).perform();
+                headerPage.popupWindowShouldBeHidden();
             }
             else Assert.assertTrue(goodsPage.addGoodToCompareIsInactive(elementGood-1),
                     "Товар уже находится в сравнении.");
@@ -71,15 +71,22 @@ public class StepsGoodsPage {
     }
 
     public void goodsContainName(String goodsName){
-        goodsPage.loaderShouldBeDisappear();
-        goodsPage.showProducts();
         Assert.assertTrue(goodsPage.goodsContainName(goodsName), "Не все товары содержат название \""+goodsName+"\"");
     }
 
+    /**
+     * Проверка располагаются ли товары на странице по убыванию цены.
+     */
     public void goodsPriceDecreases(){
-        goodsPage.loaderShouldBeDisappear();
-        goodsPage.showProducts();
         Assert.assertTrue(goodsPage.goodsPriceDecreases(),
                 "Товары расположены не по убыванию цен");
+    }
+
+    /**
+     * Ожидание загрузки страницы и прогрузка товаров после ее открытия или нажатие на фильтр.
+     */
+    public void loadGoodsPage(){
+        goodsPage.loaderShouldBeDisappear();
+        goodsPage.showProducts();
     }
 }
