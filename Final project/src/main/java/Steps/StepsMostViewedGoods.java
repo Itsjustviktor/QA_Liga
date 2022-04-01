@@ -1,14 +1,19 @@
 package Steps;
 
+import Pages.HeaderPage;
 import Pages.MostViewedGoodsPage;
 import org.testng.Assert;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.actions;
+
 public class StepsMostViewedGoods {
     private MostViewedGoodsPage mostViewedGoods;
+    private HeaderPage headerPage;
     public StepsMostViewedGoods() {
         mostViewedGoods = MostViewedGoodsPage.getMostViewedGoods();
+        headerPage = HeaderPage.getHeaderPage();
     }
 
     /**
@@ -22,21 +27,42 @@ public class StepsMostViewedGoods {
 
     /**
      * Добавление товара в корзину.
-     * @param goodsName наименование товара.
+     * @param elementGood позиция товара на странице.
      */
-    public void addGoodToCart(String goodsName){
-        mostViewedGoods.scrollToMostViewedGoodsContainer(); // Прокрутка к блоку "Самые просматриваемые".
-        mostViewedGoods.setGood(goodsName); // Поиск товара.
-        if(mostViewedGoods.goodIsExist()){ // Если товар существует.
-            if(mostViewedGoods.addGoodToCartIsInactive()){ // Если товар не находится в корзине.
-                mostViewedGoods.rememberGood(); // Запоминание товара в map.
-                mostViewedGoods.addGoodToCart(); // Добавление товара в корзину.
+    public void addGoodToCart1(Integer elementGood){
+
+        do{
+            if(mostViewedGoods.tittleIsDisplayed(elementGood)){
+                addGoodToCart(elementGood);
+                break;
             }
-            else Assert.assertTrue(mostViewedGoods.addGoodToCartIsInactive(),
-                    "Товар уже находится в корзине.");
+            else mostViewedGoods.forwardButtonClick();
         }
-        else Assert.assertTrue(mostViewedGoods.goodIsExist(),
-                "Товар не существует.");
+        while (!mostViewedGoods.forwardButtonIsDisplayed());
+
+        do{
+            if(mostViewedGoods.tittleIsDisplayed(elementGood)){
+                addGoodToCart(elementGood);
+                break;
+            }
+            else mostViewedGoods.backwardButtonClick();
+        }
+        while (!mostViewedGoods.backwardButtonIsDisplayed());
+
+//        while (!mostViewedGoods.forwardButtonIsDisplayed()){
+//            if(mostViewedGoods.tittleIsDisplayed(elementGood)){
+//                addGoodToCart(elementGood);
+//                break;
+//            }
+//            else mostViewedGoods.forwardButtonClick();
+//        }
+//        while (!mostViewedGoods.backwardButtonIsDisplayed()){
+//            if(mostViewedGoods.tittleIsDisplayed(elementGood)){
+//                addGoodToCart(elementGood);
+//                break;
+//            }
+//            else mostViewedGoods.backwardButtonClick();
+//        }
     }
 
     /**
@@ -45,5 +71,20 @@ public class StepsMostViewedGoods {
      */
     public Map<String, Integer> addedGoods (){
         return mostViewedGoods.getRememberMostViewedGoodsMap();
+    }
+
+    private void addGoodToCart(Integer elementGood){
+        if (elementGood-1 <= mostViewedGoods.quantityOfGoods() && elementGood > 0){
+            if(mostViewedGoods.addGoodToCartIsInactive(elementGood-1)){ //Если кнопка корзины активна
+                mostViewedGoods.addGoodToCart(elementGood-1);
+                mostViewedGoods.rememberCartGood(elementGood-1);
+                actions().moveToElement(headerPage.getHeaderPlug()).perform();
+                headerPage.popupWindowShouldBeHidden();
+            }
+            else Assert.assertTrue(mostViewedGoods.addGoodToCartIsInactive(elementGood-1),
+                    "Товар уже находится в корзине.");
+        }
+        else Assert.assertTrue(elementGood-1 < mostViewedGoods.quantityOfGoods() && elementGood > 0,
+                "Позиция товара не соввпадает с отображаемыми товарами на странице");
     }
 }

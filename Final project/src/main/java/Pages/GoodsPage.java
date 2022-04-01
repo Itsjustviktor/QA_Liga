@@ -54,7 +54,6 @@ public class GoodsPage {
         return goodsPage;
     }
 
-
     /**
      * Метод для прогрузки товаров на странице.
      */

@@ -77,8 +77,8 @@ public class Tests {
     @Test (priority = 4, testName = "Проверка добавления 2 товаров в корзину и правильность ее отображения")
     public void addTwoGoodsFromMostViewedGoodsToCart(){
         stepsMostViewedGoods.mostViewedGoodsContainerIsDisplayed();
-        stepsMostViewedGoods.addGoodToCart("Смартфон Xiaomi Redmi Note 11 NFC 4GB+128GB Twilight Blue");
-        stepsMostViewedGoods.addGoodToCart("Ноутбук Acer Aspire 5 A517-52-33P2 (NX.A5DER.00W)");
+        stepsMostViewedGoods.addGoodToCart1(15);
+        //stepsMostViewedGoods.addGoodToCart1(2);
         stepsHeaderPage.clickOnCartButton();
         stepsCartPage.checkAddedGoodAndExistedGood(stepsMostViewedGoods.addedGoods());
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
