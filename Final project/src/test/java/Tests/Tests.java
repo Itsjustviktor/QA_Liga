@@ -3,9 +3,11 @@ package Tests;
 import Steps.*;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import static Formatters.UrlChecker.urlChecker;
+import static com.codeborne.selenide.Selenide.switchTo;
 
 public class Tests {
     StepsHeaderPage stepsHeaderPage;
@@ -19,7 +21,7 @@ public class Tests {
     StepsComparePage stepsComparePage;
     StepsFiltersPage stepsFiltersPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void settingsBeforeTests(){
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadTimeout = 90000;
@@ -36,13 +38,14 @@ public class Tests {
         stepsFiltersPage = new StepsFiltersPage();
     }
 
-    @AfterClass
+    @AfterMethod
     public void settingsAfterTests(){
         Selenide.clearBrowserCookies();
         Selenide.closeWebDriver();
     }
 
-    @Test (priority = 1)
+
+    @Test (priority = 1, testName = "Проверка кнопок шапки mvideo")
     public void checkMvideoHeader(){
         stepsHeaderPage.ordersStatusButtonIsDisplayedAndIsEnabled();
         stepsHeaderPage.profileButtonIsDisplayedAndIsEnabled();
@@ -51,14 +54,14 @@ public class Tests {
         stepsHeaderPage.favoritesButtonIsDisplayedAndIsDisabled();
     }
 
-    @Test (priority = 2)
+    @Test (priority = 2, testName = "Проверка активации кнопки корзины")
     public void checkCartButtonIsActive(){
         stepsDaysGoodPage.daysGoodIsDisplayed();
         stepsDaysGoodPage.daysGoodAddToCart();
         stepsHeaderPage.cartButtonIsEnabledAndContainsGood(1);
     }
 
-    @Test (priority = 3)
+    @Test (priority = 3, testName = "Проверка перехода в корзину и правильность ее отображения")
     public void checkCartThatContainsGood(){
         stepsDaysGoodPage.daysGoodIsDisplayed();
         stepsDaysGoodPage.daysGoodAddToCart();
@@ -71,17 +74,17 @@ public class Tests {
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
     }
 
-    @Test (priority = 4)
+    @Test (priority = 4, testName = "Проверка добавления 2 товаров в корзину и правильность ее отображения")
     public void addTwoGoodsFromMostViewedGoodsToCart(){
         stepsMostViewedGoods.mostViewedGoodsContainerIsDisplayed();
         stepsMostViewedGoods.addGoodToCart("Смартфон Xiaomi Redmi Note 11 NFC 4GB+128GB Twilight Blue");
-        stepsMostViewedGoods.addGoodToCart("Планшет HUAWEI MatePad T10 (2021) 2+32GB Wi-Fi Blue (AGRK-W09)");
+        stepsMostViewedGoods.addGoodToCart("Ноутбук Acer Aspire 5 A517-52-33P2 (NX.A5DER.00W)");
         stepsHeaderPage.clickOnCartButton();
         stepsCartPage.checkAddedGoodAndExistedGood(stepsMostViewedGoods.addedGoods());
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
     }
 
-    @Test (priority = 5)
+    @Test (priority = 5, testName = "Проверка поиска товаров")
     public void findGoods(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -91,7 +94,7 @@ public class Tests {
         stepsGoodsPage.goodsContainName("apple");
     }
 
-    @Test (priority = 6)
+    @Test (priority = 6, testName = "Проверка сортировки товаров")
     public void sortGoodsOnList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -105,7 +108,7 @@ public class Tests {
         stepsGoodsPage.goodsPriceDecreases();
     }
 
-    @Test (priority = 7)
+    @Test (priority = 7, testName = "Проверка модального окна авторизации клиента")
     public void checkAuthorizationWindow(){
         stepsHeaderPage.clickOnProfileButton();
         stepsAuthorizationPage.modalWindowIsDisplayed();
@@ -115,7 +118,7 @@ public class Tests {
         stepsAuthorizationPage.buttonForLawPersonsIsDisplayed();
     }
 
-    @Test (priority = 8)
+    @Test (priority = 8, testName = "Проверка добавления товаров в список сравнения")
     public void checkAddedGoodToCompareList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -130,7 +133,7 @@ public class Tests {
         stepsComparePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToCompare());
     }
 
-    @Test (priority = 9)
+    @Test (priority = 9, testName = "Проверка добавления товаров в список избранных")
     public void checkAddedGoodToFavoriteList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -145,7 +148,7 @@ public class Tests {
         stepsFavoritePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToFavorite());
     }
 
-    @Test (priority = 10)
+    @Test (priority = 10, testName = "Проверка изменения города")
     public void checkChangeCity(){
        stepsHeaderPage.clickOnLocationButton();
        stepsLocationPage.modalWindowIsDisplayed();

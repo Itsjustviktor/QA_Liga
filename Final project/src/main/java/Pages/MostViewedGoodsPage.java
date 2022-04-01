@@ -76,7 +76,7 @@ public class MostViewedGoodsPage {
      */
     public void scrollToMostViewedGoodsContainer(){
         getMostViewedGoodsContainer().scrollIntoView("{block: \"center\"}");
-        Selenide.sleep(200);
+        Selenide.sleep(300);
     }
 
 

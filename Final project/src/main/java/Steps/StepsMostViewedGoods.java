@@ -29,8 +29,8 @@ public class StepsMostViewedGoods {
         mostViewedGoods.setGood(goodsName); // Поиск товара.
         if(mostViewedGoods.goodIsExist()){ // Если товар существует.
             if(mostViewedGoods.addGoodToCartIsInactive()){ // Если товар не находится в корзине.
-            mostViewedGoods.addGoodToCart(); // Добавление товара в корзину.
-            mostViewedGoods.rememberGood(); // Запоминание товара в map.
+                mostViewedGoods.rememberGood(); // Запоминание товара в map.
+                mostViewedGoods.addGoodToCart(); // Добавление товара в корзину.
             }
             else Assert.assertTrue(mostViewedGoods.addGoodToCartIsInactive(),
                     "Товар уже находится в корзине.");

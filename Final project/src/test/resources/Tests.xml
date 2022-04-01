@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Проверка сайта Mvideo">
+
+    <test name="Проверка блока шапки главной страницы mvideo">
+        <classes>
+            <class name="Tests.Tests">
+                <methods>
+                    <include name=".*checkMvideoHeader.*"/>
+                    <include name=".*checkChangeCity.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Проверка блока корзины страницы mvideo">
+        <classes>
+            <class name="Tests.Tests">
+                <methods>
+                    <include name=".*checkCartButtonIsActive.*"/>
+                    <include name=".*checkCartThatContainsGood.*"/>
+                    <include name=".*addTwoGoodsFromMostViewedGoodsToCart.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Проверка блока товаров страницы mvideo">
+        <classes>
+            <class name="Tests.Tests">
+                <methods>
+                    <include name=".*findGoods.*"/>
+                    <include name=".*sortGoodsOnList.*"/>
+                    <include name=".*checkAddedGoodToCompareList.*"/>
+                    <include name=".*checkAddedGoodToFavoriteList.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Проверка блока авторизации страницы mvideo">
+        <classes>
+            <class name="Tests.Tests">
+                <methods>
+                    <include name=".*checkAuthorizationWindow.*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

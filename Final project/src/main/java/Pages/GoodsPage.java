@@ -7,6 +7,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -76,7 +77,7 @@ public class GoodsPage {
      * @return true - loader не виден, false - виден.
      */
     public void loaderShouldBeDisappear(){
-        getLoader().shouldBe(Condition.disappear);
+        getLoader().shouldBe(Condition.disappear, Duration.ofSeconds(20));
     }
 
     /**

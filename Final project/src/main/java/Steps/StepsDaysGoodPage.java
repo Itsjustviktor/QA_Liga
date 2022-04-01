@@ -26,8 +26,8 @@ public class StepsDaysGoodPage {
      */
     public void daysGoodAddToCart() {
         if (daysGoodPage.daysGoodIsDisplayed()){
-            daysGoodPage.daysGoodAddToCart();
             daysGoodPage.rememberGood();
+            daysGoodPage.daysGoodAddToCart();
         }
         else Assert.assertTrue(daysGoodPage.daysGoodIsDisplayed()
                 ,"Товар не отображается, добавление невозможно.");;
