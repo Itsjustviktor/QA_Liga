@@ -5,6 +5,8 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+
+import java.time.Duration;
 import java.util.Objects;
 import static Tools.XpathFormatter.formatXpath;
 
@@ -36,9 +38,14 @@ public class HeaderPage {
      */
     private String xpathSelectedCity = "//span[text() = '%s']";
     /**
+     * Xpath для нахождения bubble.
+     */
+    private String xpathBubble = "//mvid-bubble";
+    /**
      * Xpath для нахождения bubble, который содержит определенное кол-во товаров
      */
-    private String xpathBubbleCartWithSomeGoods = "//mvid-bubble[contains(.,%d)]";
+    private String xpathBubbleWithSomeGoods = "//mvid-bubble[contains(.,%d)]";
+
 
     @FindBy (xpath = "//div[contains(@class, 'tab-profile')]")
     private SelenideElement profileButton;
@@ -64,24 +71,31 @@ public class HeaderPage {
     private SelenideElement getCompareButton() {
         return compareButton;
     }
+
     private SelenideElement getFavoritesButton() {
         return favoritesButton;
     }
+
     private SelenideElement getProfileButton() {
         return profileButton;
     }
+
     private SelenideElement getCartButton() {
         return cartButton;
     }
+
     private SelenideElement getInputContainer() {
         return inputContainer;
     }
+
     private SelenideElement getLocationButton() {
         return locationButton;
     }
+
     private SelenideElement getPopupWindow() {
         return popupWindow;
     }
+
     /**
      * Возвращает элемент header. Используется для отвода курсора.
      * @return элемент header
@@ -177,6 +191,36 @@ public class HeaderPage {
     }
 
     /**
+     * Отображение bubble у сравнения.
+     * @return true - bubble видим, false - bubble не видим.
+     */
+    public boolean compareBubbleIsDisplayed(){
+        return getCompareButton()
+                .find(By.xpath("." + xpathBubble))
+                .isDisplayed();
+    }
+
+    /**
+     * Возвращение кол-ва товаров в сравнении.
+     * @return кол-во товаров в сравнении.
+     */
+    public Integer getСompareBubbleQuantity(){
+        return Integer.parseInt(getCompareButton()
+                .find(By.xpath("." + xpathBubble))
+                .getText());
+    }
+
+    /**
+     * Ожидание что сравнение содержит определенное кол-во товара.
+     * @param quantity ожидаемое кол-во товара.
+     */
+    public void waitСompareContainsSomeGood(Integer quantity){
+        getCompareButton()
+                .find(By.xpath(formatXpath(".", xpathBubbleWithSomeGoods, quantity)))
+                .shouldBe(Condition.visible, Duration.ofSeconds(10));
+    }
+
+    /**
      * Отображение кнопки "Избранное".
      * @return true - отображается, false - не отображается.
      */
@@ -212,6 +256,36 @@ public class HeaderPage {
     }
 
     /**
+     * Отображение bubble у избранного.
+     * @return true - bubble видим, false - bubble не видим.
+     */
+    public boolean favoriteBubbleIsDisplayed(){
+        return getFavoritesButton()
+                .find(By.xpath("." + xpathBubble))
+                .isDisplayed();
+    }
+
+    /**
+     * Возвращение кол-ва товаров в избранном.
+     * @return кол-во товаров в избранном.
+     */
+    public Integer getFavoriteBubbleQuantity(){
+        return Integer.parseInt(getFavoritesButton()
+                .find(By.xpath("." + xpathBubble))
+                .getText());
+    }
+
+    /**
+     * Ожидание что избранное содержит определенное кол-во товара.
+     * @param quantity ожидаемое кол-во товара.
+     */
+    public void waitFavoriteContainsSomeGood(Integer quantity){
+        getFavoritesButton()
+                .find(By.xpath(formatXpath(".", xpathBubbleWithSomeGoods, quantity)))
+                .shouldBe(Condition.visible, Duration.ofSeconds(10));
+    }
+
+    /**
      * Отображение кнопки "Корзина".
      * @return true - отображается, false - не отображается.
      */
@@ -241,15 +315,44 @@ public class HeaderPage {
     }
 
     /**
-     * Корзина содержит определенное кол-во товара.
+     * Отображение bubble у корзины.
+     * @return true - bubble видим, false - bubble не видим.
+     */
+    public boolean cartBubbleIsDisplayed(){
+        return getCartButton()
+                .find(By.xpath("." + xpathBubble))
+                .isDisplayed();
+    }
+
+    /**
+     * Возвращение кол-ва товаров в корзине.
+     * @return кол-во товаров в корзине.
+     */
+    public Integer getCartBubbleQuantity(){
+        return Integer.parseInt(getCartButton()
+                .find(By.xpath("." + xpathBubble))
+                .getText());
+    }
+
+    /**
+     * Проверка что корзина содержит определенное кол-во товара.
      * @param quantity ожидаемое кол-во товара.
      * @return true - кол-во совпадает, false - кол-во не совпадает.
      */
-    public boolean checkToCartContainsOneGood(Integer quantity){
+    public boolean checkToCartContainsSomeGood(Integer quantity){
         return getCartButton()
-                .find(By.xpath(formatXpath(".", xpathBubbleCartWithSomeGoods, quantity)))
-                .shouldBe(Condition.visible)
+                .find(By.xpath(formatXpath(".", xpathBubbleWithSomeGoods, quantity)))
                 .isDisplayed();
+    }
+
+    /**
+     * Ожидание что корзина содержит определенное кол-во товара.
+     * @param quantity ожидаемое кол-во товара.
+     */
+    public void waitCartContainsSomeGood(Integer quantity){
+        getCartButton()
+                .find(By.xpath(formatXpath(".", xpathBubbleWithSomeGoods, quantity)))
+                .shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
     /**
@@ -324,6 +427,6 @@ public class HeaderPage {
      * Ожидание сокрытия окна с товарами при добавлении в избранное, сравнение, корзину.
      */
     public void popupWindowShouldBeHidden(){
-        getPopupWindow().shouldBe(Condition.hidden);
+        getPopupWindow().shouldBe(Condition.hidden, Duration.ofSeconds(10));
     }
 }

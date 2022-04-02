@@ -1,11 +1,7 @@
 package Steps;
 
-import Pages.GoodsPage;
 import Pages.HeaderPage;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.commands.As;
 import org.testng.Assert;
-import org.testng.annotations.*;
 
 public class StepsHeaderPage {
 
@@ -80,7 +76,7 @@ public class StepsHeaderPage {
      * @param quantity ожидаемое кол-во товара.
      */
     public void cartButtonIsEnabledAndContainsGood(Integer quantity){
-        Assert.assertTrue(headerPage.cartButtonIsEnabled() && headerPage.checkToCartContainsOneGood(quantity),
+        Assert.assertTrue(headerPage.cartButtonIsEnabled() && headerPage.checkToCartContainsSomeGood(quantity),
                 "Кнопка \"Корзина\" не отображается или не содержит товара");
     }
 
@@ -109,7 +105,6 @@ public class StepsHeaderPage {
      * @param city ожидаемый город.
      */
     public void checkSelectedCity(String city){
-        Selenide.Wait();
         Assert.assertTrue(headerPage.checkSelectedCity(city),
                 "Выбранный город не совпадает с ожидаемым.");
     }
@@ -123,7 +118,6 @@ public class StepsHeaderPage {
         else Assert.assertTrue(headerPage.profileButtonIsDisplayed() && headerPage.profileButtonIsEnabled(),
                 "Кнопка \"Войти\" не отображается или неактивна.");
     }
-
 
     /**
      * Вставка названия товара в окно поиска.
@@ -147,4 +141,5 @@ public class StepsHeaderPage {
         Assert.assertTrue(headerPage.inputTextInInputFieldIsDisplayed(),
                 "Строка поиска товаров не отображается.");
     }
+
 }

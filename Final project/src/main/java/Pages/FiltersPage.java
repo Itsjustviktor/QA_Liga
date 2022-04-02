@@ -10,8 +10,17 @@ import java.util.Objects;
 public class FiltersPage {
     private static FiltersPage filtersPage;
 
+    /**
+     * Xpath для нахождения фильтра "Сначала популярные".
+     */
     String xpathFilterMostFavorite = "//span[contains(., 'Сначала популярные')]";
+    /**
+     * Xpath для нахождения названия фильтра "Сначала дороже".
+     */
     String xpathFilterFirstIsMoreExpensive = "//span[contains(., 'Сначала дороже')]";
+    /**
+     * Xpath для нахождения кнопки фильтра "Сначала дороже".
+     */
     String xpathFilterFirstIsMoreExpensiveButton = "//div[contains(@class, 'dropdown__option') " +
             "and contains(@tabindex, '0') " +
             "and contains(., 'Сначала дороже')]";
@@ -24,6 +33,7 @@ public class FiltersPage {
     private SelenideElement getSortedFiltersContainer() {
         return sortedFiltersContainer;
     }
+
     private SelenideElement getDropdownFiltersWindow() {
         return dropdownFiltersWindow;
     }
@@ -45,10 +55,10 @@ public class FiltersPage {
     }
 
     /**
-     * Выпадающий список вариантов сортировки со значением “Сначала дороже” не отображается.
-     * @return true - не отображается, false - отображается.
+     * Выпадающий список вариантов сортировки со значением “Сначала дороже” не активный.
+     * @return true - не активный, false - активный.
      */
-    public boolean filterFirstIsMoreExpensiveIsntDisplayed(){
+    public boolean filterFirstIsMoreExpensiveIsntActive(){
         return !getSortedFiltersContainer()
                 .find(By.xpath("." + xpathFilterFirstIsMoreExpensive))
                 .isDisplayed();
@@ -63,6 +73,9 @@ public class FiltersPage {
                  .click();
     }
 
+    /**
+     * Нажатие на фильтр "Сначала дороже".
+     */
     public void clickOnFirstIsMoreExpensiveButton(){
         getDropdownFiltersWindow()
                 .find(By.xpath("." + xpathFilterFirstIsMoreExpensiveButton))

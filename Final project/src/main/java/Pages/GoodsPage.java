@@ -17,9 +17,18 @@ import java.util.Objects;
 public class GoodsPage {
     private static GoodsPage goodsPage;
 
+    /**
+     * Xpath для нахождения цены товара.
+     */
     private String xpathGoodsFinalPrice = "//following::span[contains(@class, 'price__main-value')][1]";
+    /**
+     * Xpath для нахождения кнопки добавления в избранное.
+     */
     private String xpathGoodsFavoriteButton = "//following::div[contains(@class, 'wishlist-button-block')][1]" +
             "//button[contains(@class, 'button')][1]";
+    /**
+     * Xpath для нахождения кнопки добавления в сравнение.
+     */
     private String xpathGoodsCompareButton = "//following::div[contains(@class, 'compare-button-block')][1]" +
             "//button[contains(@class, 'button')][1]";
 
@@ -35,15 +44,19 @@ public class GoodsPage {
     private ElementsCollection getProductContainers() {
         return productContainers;
     }
+
     public Map<String, Integer> getRememberFavoriteGoodsMap() {
         return rememberFavoriteGoodsMap;
     }
+
     public Map<String, Integer> getRememberCompareGoodsMap() {
         return rememberCompareGoodsMap;
     }
+
     private SelenideElement getLoader() {
         return loader;
     }
+
     public ElementsCollection getTittlesCollection() {
         return tittlesCollection;
     }
@@ -88,7 +101,6 @@ public class GoodsPage {
                 .find(By.xpath("."+ xpathGoodsFavoriteButton))
                 .scrollIntoView("{block: \"center\"}")
                 .click();
-        Selenide.sleep(1000);
     }
 
     /**
@@ -112,7 +124,6 @@ public class GoodsPage {
                 .find(By.xpath("." + xpathGoodsCompareButton))
                 .scrollIntoView("{block: \"center\"}")
                 .click();
-        Selenide.sleep(1000);
     }
 
     /**
@@ -181,7 +192,6 @@ public class GoodsPage {
         return elementContainsNameIsTrue;
     }
 
-
     /**
      * Проверка располагаются ли товары на странице по убыванию цены.
      * @return true - сортировка соответствует, false - сортировка не соответствует.
@@ -205,8 +215,5 @@ public class GoodsPage {
             }
         return goodsPriceDecreasesIsTrue;
     }
-
-
-
 
 }

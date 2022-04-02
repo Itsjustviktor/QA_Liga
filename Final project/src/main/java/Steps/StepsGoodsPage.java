@@ -3,9 +3,7 @@ package Steps;
 import Pages.GoodsPage;
 import Pages.HeaderPage;
 import org.testng.Assert;
-
 import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.actions;
 
 public class StepsGoodsPage {
@@ -21,18 +19,35 @@ public class StepsGoodsPage {
      * @param elementGood позиция товара на странице.
      */
     public void addGoodToFavorite(Integer elementGood){
-        if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){
-            if(goodsPage.addGoodToFavoriteIsInactive(elementGood-1)){
-                goodsPage.addGoodToFavorite(elementGood-1);
-                goodsPage.rememberFavoriteGood(elementGood-1);
-                actions().moveToElement(headerPage.getHeaderPlug()).perform();
-                headerPage.popupWindowShouldBeHidden();
+        Integer numberIntoCartBubble = 1;
+        if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){ // Если пользователь правильно указал позицию товара.
+            if(goodsPage.addGoodToFavoriteIsInactive(elementGood-1)){ // Если кнопка добавления товара в избранное активна.
+                if (headerPage.favoriteBubbleIsDisplayed()) { // Если bubble отображается
+                    numberIntoCartBubble = headerPage.getFavoriteBubbleQuantity();
+                    clickToFavoriteButtonIntoGoodsContainer(elementGood);
+                    headerPage.waitFavoriteContainsSomeGood(numberIntoCartBubble+1);
+                }
+                else { // Если bubble не отображается
+                    clickToFavoriteButtonIntoGoodsContainer(elementGood);
+                    headerPage.waitFavoriteContainsSomeGood(numberIntoCartBubble);
+                }
             }
             else Assert.assertTrue(goodsPage.addGoodToFavoriteIsInactive(elementGood-1),
                     "Товар уже находится в избранном.");
         }
-        else Assert.assertTrue(elementGood-1 < goodsPage.quantityOfGoods() && elementGood > 0,
+        else Assert.assertTrue(elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0,
                 "Позиция товара не соввпадает с отображаемыми товарами на странице");
+    }
+
+    /**
+     * Нажатие на кнопку добаления в избранное у товара, ожидания сокрытия окна с товарами.
+     * @param elementGood позиция товара на странице.
+     */
+    private void clickToFavoriteButtonIntoGoodsContainer(Integer elementGood){
+        goodsPage.rememberFavoriteGood(elementGood-1);
+        goodsPage.addGoodToFavorite(elementGood-1);
+        actions().moveToElement(headerPage.getHeaderPlug()).perform();
+        headerPage.popupWindowShouldBeHidden();
     }
 
     /**
@@ -40,18 +55,35 @@ public class StepsGoodsPage {
      * @param elementGood позиция товара на странице.
      */
     public void addGoodToCompare(Integer elementGood){
-        if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){
-            if(goodsPage.addGoodToCompareIsInactive(elementGood-1)){
-                goodsPage.addGoodToCompare(elementGood-1);
-                goodsPage.rememberCompareGood(elementGood-1);
-                actions().moveToElement(headerPage.getHeaderPlug()).perform();
-                headerPage.popupWindowShouldBeHidden();
+        Integer numberIntoCartBubble = 1;
+        if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){ // Если пользователь правильно указал позицию товара.
+            if(goodsPage.addGoodToCompareIsInactive(elementGood-1)){ // Если кнопка добавления товара в избранное активна.
+                if (headerPage.compareBubbleIsDisplayed()) { // Если bubble отображается
+                    numberIntoCartBubble = headerPage.getСompareBubbleQuantity();
+                    clickToCompareButtonIntoGoodsContainer(elementGood);
+                    headerPage.waitСompareContainsSomeGood(numberIntoCartBubble+1);
+                }
+                else { // Если bubble не отображается
+                    clickToCompareButtonIntoGoodsContainer(elementGood);
+                    headerPage.waitСompareContainsSomeGood(numberIntoCartBubble);
+                }
             }
             else Assert.assertTrue(goodsPage.addGoodToCompareIsInactive(elementGood-1),
                     "Товар уже находится в сравнении.");
         }
         else Assert.assertTrue(elementGood-1 < goodsPage.quantityOfGoods() && elementGood > 0,
                 "Позиция товара не соввпадает с отображаемыми товарами на странице");
+    }
+
+    /**
+     * Нажатие на кнопку добаления в сравнение у товара, ожидания сокрытия окна с товарами.
+     * @param elementGood позиция товара на странице.
+     */
+    private void clickToCompareButtonIntoGoodsContainer(Integer elementGood){
+        goodsPage.rememberCompareGood(elementGood-1);
+        goodsPage.addGoodToCompare(elementGood-1);
+        actions().moveToElement(headerPage.getHeaderPlug()).perform();
+        headerPage.popupWindowShouldBeHidden();
     }
 
     /**
@@ -70,6 +102,10 @@ public class StepsGoodsPage {
         return goodsPage.getRememberCompareGoodsMap();
     }
 
+    /**
+     * Проверка вхождений названий у всех товаров.
+     * @param goodsName частичка или полное название товара.
+     */
     public void goodsContainName(String goodsName){
         Assert.assertTrue(goodsPage.goodsContainName(goodsName), "Не все товары содержат название \""+goodsName+"\"");
     }
@@ -89,4 +125,5 @@ public class StepsGoodsPage {
         goodsPage.loaderShouldBeDisappear();
         goodsPage.showProducts();
     }
+
 }

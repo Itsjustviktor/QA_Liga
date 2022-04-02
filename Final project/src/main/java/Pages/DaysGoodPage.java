@@ -31,6 +31,7 @@ public class DaysGoodPage {
     private SelenideElement getDaysGoodContainer() {
         return daysGoodContainer;
     }
+
     public Map<String, Integer> getRememberDaysGoodsMap() {
         return rememberDaysGoodsMap;
     }

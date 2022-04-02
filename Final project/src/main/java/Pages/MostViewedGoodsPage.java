@@ -16,18 +16,22 @@ import java.util.Objects;
 public class MostViewedGoodsPage {
     private static MostViewedGoodsPage mostViewedGoods;
 
+    /**
+     * Xpath для нахождения контейнера самых просматриваемых товаров.
+     */
     private String xpathMostViewedGoodsContainer = "//mvid-simple-product-collection-mp[contains(., 'Самые просматриваемые')]";
+    /**
+     * Xpath для нахождения цены товара.
+     */
     private String xpathGoodsFinalPrice = "//following::span[contains(@class, 'price__main-value')][1]";
+    /**
+     * Xpath для нахождения названия товара.
+     */
     private String xpathGoodsCartButton = "//following::button[contains(@class, 'actions__cart')][1]";
-    private String xpathGoodsFavoriteButton = "//following::button[contains(@class, 'actions__favorite')][1]";
-    private String xpathGoodsCompareButton = "//following::button[contains(@class, 'actions__compare')][1]";
-    private String xpathForwardButton = "//button[contains(@class, 'forward')]";
-    private String xpathBackwardButton = "//button[contains(@class, 'backward')]";
 
     @FindBy (xpath = "//mvid-simple-product-collection-mp[contains(., 'Самые просматриваемые')]")
     private SelenideElement mostViewedGoodsContainer;
-    //@FindBy(xpath = "//div[contains(@class, 'product-mini-card__name')]")
-    private ElementsCollection goodsTittleCollections = $$x (xpathMostViewedGoodsContainer + "//div[contains(@class, 'product-mini-card__name')]");
+    private ElementsCollection goodsTittleCollections = $$x(xpathMostViewedGoodsContainer + "//div[contains(@class, 'product-mini-card__name')]");
     @FindBy (xpath = "//mvid-simple-product-collection-mp")
     private ElementsCollection containers;
     private Map<String, Integer> rememberMostViewedGoodsMap = new HashMap<>();
@@ -73,7 +77,6 @@ public class MostViewedGoodsPage {
                 .isDisplayed();
     }
 
-
     /**
      * Возращение кол-ва товаров на странице.
      * @return кол-ва товаров на странице
@@ -91,7 +94,6 @@ public class MostViewedGoodsPage {
                 .find(By.xpath("."+ xpathGoodsCartButton))
                 .scrollIntoView("{block: \"center\"}")
                 .click();
-        Selenide.sleep(1000);
     }
 
     /**

@@ -1,17 +1,18 @@
 package Steps;
 
 import Pages.DaysGoodPage;
+import Pages.HeaderPage;
 import com.codeborne.selenide.commands.As;
 import org.testng.Assert;
-
 import java.util.Map;
-
+import static com.codeborne.selenide.Selenide.actions;
 
 public class StepsDaysGoodPage {
-
+    private HeaderPage headerPage;
     private DaysGoodPage daysGoodPage;
     public StepsDaysGoodPage() {
         daysGoodPage = DaysGoodPage.getDaysGoodPage();
+        headerPage = HeaderPage.getHeaderPage();
     }
 
     /**
@@ -26,11 +27,29 @@ public class StepsDaysGoodPage {
      */
     public void daysGoodAddToCart() {
         if (daysGoodPage.daysGoodIsDisplayed()){
-            daysGoodPage.rememberGood();
-            daysGoodPage.daysGoodAddToCart();
+            Integer numberIntoCartBubble = 1;
+            if (headerPage.cartBubbleIsDisplayed()) { // Если bubble отображается
+                numberIntoCartBubble = headerPage.getCartBubbleQuantity();
+                clickToCartButtonIntoDaysGoodsContainer();
+                headerPage.waitCartContainsSomeGood(numberIntoCartBubble+1);
+            }
+            else {
+                clickToCartButtonIntoDaysGoodsContainer();
+                headerPage.waitCartContainsSomeGood(numberIntoCartBubble);
+            }
         }
         else Assert.assertTrue(daysGoodPage.daysGoodIsDisplayed()
                 ,"Товар не отображается, добавление невозможно.");;
+    }
+
+    /**
+     * Нажатие на кнопку добаления в корзину у товара дня, ожидания сокрытия окна с товарами.
+     */
+    private void clickToCartButtonIntoDaysGoodsContainer(){
+        daysGoodPage.rememberGood();
+        daysGoodPage.daysGoodAddToCart();
+        actions().moveToElement(headerPage.getHeaderPlug()).perform();
+        headerPage.popupWindowShouldBeHidden();
     }
 
     /**

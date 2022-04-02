@@ -2,13 +2,9 @@ package Steps;
 
 import Pages.HeaderPage;
 import Pages.MostViewedGoodsPage;
-import com.codeborne.selenide.Selenide;
 import org.testng.Assert;
-
 import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.actions;
-import static com.codeborne.selenide.Selenide.sleep;
 
 public class StepsMostViewedGoods {
     private MostViewedGoodsPage mostViewedGoods;
@@ -32,18 +28,35 @@ public class StepsMostViewedGoods {
      * @param elementGood позиция товара на странице.
      */
     public void addGoodToCart(Integer elementGood){
-        if (elementGood-1 <= mostViewedGoods.quantityOfGoods() && elementGood > 0){
-            if(mostViewedGoods.addGoodToCartIsInactive(elementGood-1)){ //Если кнопка корзины активна
-                mostViewedGoods.addGoodToCart(elementGood-1);
-                mostViewedGoods.rememberCartGood(elementGood-1);
-                actions().moveToElement(headerPage.getHeaderPlug()).perform();
-                headerPage.popupWindowShouldBeHidden();
+        Integer numberIntoCartBubble = 1;
+        if (elementGood <= mostViewedGoods.quantityOfGoods() && elementGood > 0){ // Если пользователь правильно указал позицию товара.
+            if(mostViewedGoods.addGoodToCartIsInactive(elementGood-1)){ // Если кнопка добавления товара в корзину активна.
+                if (headerPage.cartBubbleIsDisplayed()) { // Если bubble отображается
+                    numberIntoCartBubble = headerPage.getCartBubbleQuantity();
+                    clickToCartButtonIntoGoodsContainer(elementGood);
+                    headerPage.waitCartContainsSomeGood(numberIntoCartBubble+1);
+                }
+                else { // Если bubble не отображается
+                    clickToCartButtonIntoGoodsContainer(elementGood);
+                    headerPage.waitCartContainsSomeGood(numberIntoCartBubble);
+                }
             }
             else Assert.assertTrue(mostViewedGoods.addGoodToCartIsInactive(elementGood-1),
                     "Товар уже находится в корзине.");
         }
-        else Assert.assertTrue(elementGood-1 < mostViewedGoods.quantityOfGoods() && elementGood > 0,
+        else Assert.assertTrue(elementGood <= mostViewedGoods.quantityOfGoods() && elementGood > 0,
                 "Позиция товара не соввпадает с отображаемыми товарами на странице");
+    }
+
+    /**
+     * Нажатие на кнопку добаления в корзину у товара, ожидания сокрытия окна с товарами.
+     * @param elementGood позиция товара на странице.
+     */
+    private void clickToCartButtonIntoGoodsContainer(Integer elementGood){
+        mostViewedGoods.rememberCartGood(elementGood-1);
+        mostViewedGoods.addGoodToCart(elementGood-1);
+        actions().moveToElement(headerPage.getHeaderPlug()).perform();
+        headerPage.popupWindowShouldBeHidden();
     }
 
     /**

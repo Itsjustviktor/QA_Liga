@@ -2,7 +2,6 @@ package Steps;
 
 import Pages.ComparePage;
 import org.testng.Assert;
-
 import java.util.Map;
 
 public class StepsComparePage {
@@ -36,4 +35,5 @@ public class StepsComparePage {
     private boolean checkMapsSizes(Map<String, Integer> addedGoods){
         return (comparePage.compareGoodsSize() == addedGoods.size());
     }
+
 }

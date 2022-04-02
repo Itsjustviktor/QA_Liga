@@ -3,7 +3,6 @@ package Steps;
 import Pages.CartPage;
 import Pages.DaysGoodPage;
 import org.testng.Assert;
-
 import java.util.Map;
 
 public class StepsCartPage {
@@ -19,15 +18,6 @@ public class StepsCartPage {
     public void headerMyCartIsDisplayed(){
         Assert.assertTrue(cartPage.headerMyCartIsDisplayed(),
                 "Заголовок \"Моя корзина\" не отображается.");
-    }
-
-    /**
-     * Проверка соответствует ли url ожидаемому url.
-     * @param url ожидаемое url.
-     */
-    public void checkCurrentPage(String url){
-        Assert.assertEquals(cartPage.getUrl(), url,
-                "Страница не соответствует url.");
     }
 
     /**

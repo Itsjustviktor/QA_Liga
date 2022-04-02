@@ -5,7 +5,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.Objects;
 
 public class AuthorizationPage {
@@ -40,12 +39,15 @@ public class AuthorizationPage {
     private SelenideElement getModalWindow() {
         return modalWindow;
     }
+
     private SelenideElement getPhoneInputField() {
         return phoneInputField;
     }
+
     private SelenideElement getContinueButton() {
         return continueButton;
     }
+
     private SelenideElement getButtonForLawPersons() {
         return buttonForLawPersons;
     }

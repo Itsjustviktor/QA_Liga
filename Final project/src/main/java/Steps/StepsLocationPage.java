@@ -1,8 +1,6 @@
 package Steps;
 
-import Pages.HeaderPage;
 import Pages.LocationPage;
-import com.sun.source.tree.AssertTree;
 import org.testng.Assert;
 
 public class StepsLocationPage {
@@ -37,7 +35,5 @@ public class StepsLocationPage {
         Assert.assertTrue(locationPage.modalWindowIsntDisplayed(),
                 "Модальное окно видимо.");
     }
-
-
 
 }

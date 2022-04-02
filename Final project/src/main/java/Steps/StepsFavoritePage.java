@@ -1,9 +1,7 @@
 package Steps;
 
-import Pages.CartPage;
 import Pages.FavoritePage;
 import org.testng.Assert;
-
 import java.util.Map;
 
 public class StepsFavoritePage {
@@ -38,4 +36,5 @@ public class StepsFavoritePage {
     private boolean checkMapsSizes(Map<String, Integer> addedGoods){
         return (favoritePage.favoriteGoodsSize() == addedGoods.size());
     }
+
 }

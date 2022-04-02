@@ -3,9 +3,7 @@ package Pages;
 import com.codeborne.selenide.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.*;
-
 import static com.codeborne.selenide.Selenide.$$x;
 
 public class CartPage {
@@ -29,22 +27,26 @@ public class CartPage {
     @FindBy (xpath = "//span[contains(@class,'c-cost-line__text')]")
     private SelenideElement expectedSummOfGoods;
     private ElementsCollection goodsContainers = $$x("//div[contains(@class, 'c-cart-item__wrapper ')]");
-
     Map<String, Integer> cartsGoods = new LinkedHashMap<>();
 
     private ElementsCollection getGoodsContainers() {return goodsContainers;}
+
     private SelenideElement getHeaderMyCart() {
         return headerMyCart;
     }
+
     private SelenideElement getContinueButton() {
         return continueButton;
     }
+
     private SelenideElement getHeaderThatContainsQuantityGoods() {
         return headerThatContainsQuantityGoods;
     }
+
     private SelenideElement getExpectedSummOfGoods() {
         return expectedSummOfGoods;
     }
+
     private Map<String, Integer> getCartsGoods() {
         return cartsGoods;
     }
@@ -54,16 +56,6 @@ public class CartPage {
     public static CartPage getCartPage() {
         if (Objects.isNull(cartPage)) cartPage = Selenide.page(new CartPage());
         return cartPage;
-    }
-
-    /**
-     * Получение URL страницы.
-     * @return URL страницы.
-     */
-    public String getUrl()
-    {
-       return WebDriverRunner.url()
-               .replace("https://www.mvideo.ru", "");
     }
 
     /**
@@ -173,4 +165,5 @@ public class CartPage {
                 .replace(" ","")
                 .replace("¤",""));
     }
+
 }

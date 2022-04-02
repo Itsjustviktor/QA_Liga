@@ -3,25 +3,30 @@ package Pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-
 import static com.codeborne.selenide.Selenide.$$x;
 
 public class ComparePage {
     private static ComparePage comparePage;
 
+    /**
+     * Xpath для нахождения названия товара.
+     */
     private String xpathTittle = "//h3[contains(@class, 'fl-product-tile__title')]";
+    /**
+     * Xpath для нахождения цены товара.
+     */
     private String xpathLastPrice = "//span[contains(@class, 'fl-product-tile-price__current')]";
 
-    Map<String, Integer> compareGoods = new LinkedHashMap<>();
     private ElementsCollection goodsContainers = $$x("//div[contains(@class, 'c-compare-cell__pinable-product-tile')]");
+    Map<String, Integer> compareGoods = new LinkedHashMap<>();
 
     private ElementsCollection getGoodsContainers() {
         return goodsContainers;
     }
+
     public Map<String, Integer> getCompareGoods() {
         return compareGoods;
     }
@@ -47,7 +52,6 @@ public class ComparePage {
     public Integer compareGoodsSize(){
         return getGoodsContainers().size();
     }
-
 
     /**
      * Запоминание товаров, лежащих в избранном, в map.
@@ -79,7 +83,5 @@ public class ComparePage {
                 .stream()
                 .allMatch(entry -> receivedGoods.containsKey(entry.getKey()) && receivedGoods.containsValue(entry.getValue()));
     }
-
-
 
 }

@@ -13,7 +13,13 @@ import static com.codeborne.selenide.Selenide.$$x;
 public class FavoritePage {
     private static FavoritePage favoritePage;
 
+    /**
+     * Xpath для нахождения названия товара.
+     */
     private String xpathTittle = "//h3[contains(@class, 'wishlist-product-title')]";
+    /**
+     * Xpath для нахождения цены товара.
+     */
     private String xpathLastPrice = "//div[contains(@class, 'wishlist-price__current')]";
 
     Map<String, Integer> favoriteGoods = new LinkedHashMap<>();
@@ -22,6 +28,7 @@ public class FavoritePage {
     private ElementsCollection getGoodsContainers() {
         return goodsContainers;
     }
+
     public Map<String, Integer> getFavoriteGoods() {
         return favoriteGoods;
     }
@@ -31,7 +38,6 @@ public class FavoritePage {
         if (Objects.isNull(favoritePage)) favoritePage = Selenide.page(new FavoritePage());
         return favoritePage;
     }
-
 
     /**
      * Проверка пуста ли корзина.
@@ -48,7 +54,6 @@ public class FavoritePage {
     public Integer favoriteGoodsSize(){
         return getGoodsContainers().size();
     }
-
 
     /**
      * Запоминание товаров, лежащих в избранном, в map.
@@ -80,6 +85,5 @@ public class FavoritePage {
                 .stream()
                 .allMatch(entry -> receivedGoods.containsKey(entry.getKey()) && receivedGoods.containsValue(entry.getValue()));
     }
-
 
 }
