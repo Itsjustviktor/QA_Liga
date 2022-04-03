@@ -3,6 +3,7 @@ package Steps;
 import Pages.DaysGoodPage;
 import Pages.HeaderPage;
 import com.codeborne.selenide.commands.As;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.util.Map;
 import static com.codeborne.selenide.Selenide.actions;
@@ -15,16 +16,19 @@ public class StepsDaysGoodPage {
         headerPage = HeaderPage.getHeaderPage();
     }
 
+
     /**
      * Карточка "Товар дня" отображается.
      */
+    @Step ("Карточка \"Товар дня\" отображается")
     public void daysGoodIsDisplayed(){
         Assert.assertTrue(daysGoodPage.daysGoodIsDisplayed(),"Товар дня не отображается.");
     }
 
     /**
-     * Добавленный(ые) товар(ы) дня в корзину.
+     * Добавленние товара дня в корзину.
      */
+    @Step ("Добавленние товара дня в корзину.")
     public void daysGoodAddToCart() {
         if (daysGoodPage.daysGoodIsDisplayed()){
             Integer numberIntoCartBubble = 1;

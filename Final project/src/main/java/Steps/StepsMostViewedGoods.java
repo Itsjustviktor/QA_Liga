@@ -2,6 +2,7 @@ package Steps;
 
 import Pages.HeaderPage;
 import Pages.MostViewedGoodsPage;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.util.Map;
 import static com.codeborne.selenide.Selenide.actions;
@@ -17,6 +18,7 @@ public class StepsMostViewedGoods {
     /**
      * Проверка отображения блока "Самые просматриваемые".
      */
+    @Step("Проверка отображения блока \"Самые просматриваемые\"")
     public void mostViewedGoodsContainerIsDisplayed(){
         mostViewedGoods.showAllContainers();
         Assert.assertTrue(mostViewedGoods.mostViewedGoodsContainerIsDisplayed(),
@@ -27,6 +29,7 @@ public class StepsMostViewedGoods {
      * Добавление товара в корзину.
      * @param elementGood позиция товара на странице.
      */
+    @Step("Добавление товара, находящийся {elementGood}ым в списке в корзину")
     public void addGoodToCart(Integer elementGood){
         Integer numberIntoCartBubble = 1;
         if (elementGood <= mostViewedGoods.quantityOfGoods() && elementGood > 0){ // Если пользователь правильно указал позицию товара.
@@ -66,5 +69,4 @@ public class StepsMostViewedGoods {
     public Map<String, Integer> addedGoods (){
         return mostViewedGoods.getRememberMostViewedGoodsMap();
     }
-
 }

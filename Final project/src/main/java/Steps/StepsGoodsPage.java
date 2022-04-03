@@ -2,6 +2,7 @@ package Steps;
 
 import Pages.GoodsPage;
 import Pages.HeaderPage;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.util.Map;
 import static com.codeborne.selenide.Selenide.actions;
@@ -18,6 +19,7 @@ public class StepsGoodsPage {
      * Добавление товара в избранное.
      * @param elementGood позиция товара на странице.
      */
+    @Step("Добавление товара, находящийся {elementGood}ым в списке в избранное")
     public void addGoodToFavorite(Integer elementGood){
         Integer numberIntoCartBubble = 1;
         if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){ // Если пользователь правильно указал позицию товара.
@@ -51,9 +53,10 @@ public class StepsGoodsPage {
     }
 
     /**
-     * Добавление товара в избранное.
+     * Добавление товара в сравнение.
      * @param elementGood позиция товара на странице.
      */
+    @Step("Добавление товара, находящийся {elementGood}ым в списке в сравнение")
     public void addGoodToCompare(Integer elementGood){
         Integer numberIntoCartBubble = 1;
         if (elementGood-1 <= goodsPage.quantityOfGoods() && elementGood > 0){ // Если пользователь правильно указал позицию товара.
@@ -103,9 +106,10 @@ public class StepsGoodsPage {
     }
 
     /**
-     * Проверка вхождений названий у всех товаров.
+     * Проверка вхождений слова в названиях у всех товаров.
      * @param goodsName частичка или полное название товара.
      */
+    @Step("Проверка вхождений слова \"{elementGood}\" в названиях у всех товаров")
     public void goodsContainName(String goodsName){
         Assert.assertTrue(goodsPage.goodsContainName(goodsName), "Не все товары содержат название \""+goodsName+"\"");
     }
@@ -113,6 +117,7 @@ public class StepsGoodsPage {
     /**
      * Проверка располагаются ли товары на странице по убыванию цены.
      */
+    @Step("Проверка располагаются ли товары на странице по убыванию цены")
     public void goodsPriceDecreases(){
         Assert.assertTrue(goodsPage.goodsPriceDecreases(),
                 "Товары расположены не по убыванию цен");
@@ -121,6 +126,7 @@ public class StepsGoodsPage {
     /**
      * Ожидание загрузки страницы и прогрузка товаров после ее открытия или нажатие на фильтр.
      */
+    @Step("Ожидание загрузки страницы и прогрузка товаров после ее открытия или нажатие на фильтр")
     public void loadGoodsPage(){
         goodsPage.loaderShouldBeDisappear();
         goodsPage.showProducts();

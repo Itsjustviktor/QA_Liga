@@ -3,6 +3,8 @@ package Tests;
 import Steps.*;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.testng.annotations.*;
 import static Tools.UrlChecker.urlChecker;
 
@@ -18,8 +20,8 @@ public class Tests {
     StepsComparePage stepsComparePage;
     StepsFiltersPage stepsFiltersPage;
 
-    @BeforeMethod
-    public void settingsBeforeTests(){
+    @BeforeMethod (description = "Открытие страницы браузера")
+    public void setup(){
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadTimeout = 90000;
         Selenide.open("https://www.mvideo.ru/");
@@ -35,13 +37,16 @@ public class Tests {
         stepsFiltersPage = new StepsFiltersPage();
     }
 
-    @AfterMethod
-    public void settingsAfterTests(){
+    @AfterMethod(description = "Очистка куки и закрытие браузера")
+    public void teardown(){
         Selenide.clearBrowserCookies();
         Selenide.closeWebDriver();
     }
 
-    @Test (testName = "Проверка кнопок шапки mvideo")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока шапки главной страницы mvideo")
+    @Test (testName = "Проверка кнопок шапки mvideo",
+            description = "Проверка кнопок шапки mvideo")
     public void checkMvideoHeader(){
         stepsHeaderPage.ordersStatusButtonIsDisplayedAndIsEnabled();
         stepsHeaderPage.profileButtonIsDisplayedAndIsEnabled();
@@ -50,14 +55,20 @@ public class Tests {
         stepsHeaderPage.favoritesButtonIsDisplayedAndIsDisabled();
     }
 
-    @Test (testName = "Проверка активации кнопки корзины")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока корзины страницы mvideo")
+    @Test (testName = "Проверка активации кнопки корзины",
+            description = "Проверка активации кнопки корзины")
     public void checkCartButtonIsActive(){
         stepsDaysGoodPage.daysGoodIsDisplayed();
         stepsDaysGoodPage.daysGoodAddToCart();
         stepsHeaderPage.cartButtonIsEnabledAndContainsGood(1);
     }
 
-    @Test (testName = "Проверка перехода в корзину и правильность ее отображения")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока корзины страницы mvideo")
+    @Test (testName = "Проверка перехода в корзину и правильность ее отображения",
+            description = "Проверка перехода в корзину и правильность ее отображения")
     public void checkCartThatContainsGood(){
         stepsDaysGoodPage.daysGoodIsDisplayed();
         stepsDaysGoodPage.daysGoodAddToCart();
@@ -70,7 +81,10 @@ public class Tests {
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
     }
 
-    @Test (testName = "Проверка добавления 2 товаров в корзину и правильность ее отображения")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока корзины страницы mvideo")
+    @Test (testName = "Проверка добавления 2 товаров в корзину и правильность ее отображения",
+            description = "Проверка добавления 2 товаров в корзину и правильность ее отображения")
     public void addTwoGoodsFromMostViewedGoodsToCart(){
         stepsMostViewedGoods.mostViewedGoodsContainerIsDisplayed();
         stepsMostViewedGoods.addGoodToCart(1);
@@ -80,7 +94,10 @@ public class Tests {
         stepsCartPage.realSummOfGoodsEqualsToExpectedSumm();
     }
 
-    @Test (testName = "Проверка поиска товаров")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока товаров страницы mvideo")
+    @Test (testName = "Проверка поиска товаров",
+            description = "Проверка поиска товаров")
     public void findGoods(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -90,7 +107,10 @@ public class Tests {
         stepsGoodsPage.goodsContainName("apple");
     }
 
-    @Test (testName = "Проверка сортировки товаров")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока товаров страницы mvideo")
+    @Test (testName = "Проверка сортировки товаров",
+            description = "Проверка сортировки товаров")
     public void sortGoodsOnList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -104,7 +124,10 @@ public class Tests {
         stepsGoodsPage.goodsPriceDecreases();
     }
 
-    @Test (testName = "Проверка модального окна авторизации клиента")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока авторизации страницы mvideo")
+    @Test (testName = "Проверка модального окна авторизации клиента",
+            description = "Проверка модального окна авторизации клиента")
     public void checkAuthorizationWindow(){
         stepsHeaderPage.clickOnProfileButton();
         stepsAuthorizationPage.modalWindowIsDisplayed();
@@ -114,7 +137,10 @@ public class Tests {
         stepsAuthorizationPage.buttonForLawPersonsIsDisplayed();
     }
 
-    @Test (testName = "Проверка добавления товаров в список сравнения")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока товаров страницы mvideo")
+    @Test (testName = "Проверка добавления товаров в список сравнения",
+            description = "Проверка добавления товаров в список сравнения")
     public void checkAddedGoodToCompareList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -129,7 +155,10 @@ public class Tests {
         stepsComparePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToCompare());
     }
 
-    @Test (testName = "Проверка добавления товаров в список избранных")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока товаров страницы mvideo")
+    @Test (testName = "Проверка добавления товаров в список избранных",
+            description = "Проверка добавления товаров в список избранных")
     public void checkAddedGoodToFavoriteList(){
         stepsHeaderPage.inputTextInInputFieldIsDisplayed();
         stepsHeaderPage.inputTextInInputField("apple");
@@ -144,7 +173,10 @@ public class Tests {
         stepsFavoritePage.checkAddedGoodAndExistedGood(stepsGoodsPage.addedGoodsToFavorite());
     }
 
-    @Test (testName = "Проверка изменения города")
+    @Epic("Тесты сайта mvideo")
+    @Feature("Проверка блока шапки главной страницы mvideo")
+    @Test (testName = "Проверка изменения города",
+            description = "Проверка изменения города")
     public void checkChangeCity(){
        stepsHeaderPage.clickOnLocationButton();
        stepsLocationPage.modalWindowIsDisplayed();

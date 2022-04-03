@@ -4,7 +4,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.Objects;
 
 public class FiltersPage {
@@ -71,6 +70,14 @@ public class FiltersPage {
          getSortedFiltersContainer()
                  .scrollIntoView("{block: \"center\"}")
                  .click();
+    }
+
+    /**
+     * Проверка выпал ли контейнер с фильтрами.
+     */
+    public boolean checkSortedFiltersContainerWasDrop(){
+        return getSortedFiltersContainer()
+                .isDisplayed();
     }
 
     /**

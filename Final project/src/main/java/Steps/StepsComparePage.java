@@ -1,6 +1,7 @@
 package Steps;
 
 import Pages.ComparePage;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.util.Map;
 
@@ -11,9 +12,10 @@ public class StepsComparePage {
     }
 
     /**
-     * Сравнение товаров находящихся в корзине с товарами, которые были добавлены.
+     * Сравнение товаров находящихся в сравнении с товарами, которые были добавлены.
      * @param addedGoods map добавленных товаров.
      */
+    @Step("Сравнение товаров находящихся в сравнении с товарами, которые были добавлены")
     public void checkAddedGoodAndExistedGood(Map<String, Integer> addedGoods){
         if(!comparePage.compareGoodsIsntEmpty()) {
             comparePage.rememberGoodsNameAndPriceInCompare();
@@ -28,7 +30,7 @@ public class StepsComparePage {
     }
 
     /**
-     * Проверка кол-ва  добавляемых товаров и товаров в корзине.
+     * Проверка кол-ва  добавляемых товаров и товаров в сравнении.
      * @param addedGoods map добавленных товаров.
      * @return true - кол-во совпадает, false кол-во не совпадает.
      */

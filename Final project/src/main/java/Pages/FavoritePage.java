@@ -3,11 +3,9 @@ package Pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-
 import static com.codeborne.selenide.Selenide.$$x;
 
 public class FavoritePage {

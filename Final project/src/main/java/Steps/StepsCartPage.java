@@ -2,6 +2,7 @@ package Steps;
 
 import Pages.CartPage;
 import Pages.DaysGoodPage;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class StepsCartPage {
     /**
      * Отображение заголовка "Моя корзина".
      */
+    @Step("Отображение заголовка \"Моя корзина\"")
     public void headerMyCartIsDisplayed(){
         Assert.assertTrue(cartPage.headerMyCartIsDisplayed(),
                 "Заголовок \"Моя корзина\" не отображается.");
@@ -24,6 +26,7 @@ public class StepsCartPage {
      * Сравнение товаров находящихся в корзине с товарами, которые были добавлены.
      * @param addedGoods map добавленных товаров.
      */
+    @Step("Сравнение товаров находящихся в корзине с товарами, которые были добавлены")
     public void checkAddedGoodAndExistedGood(Map<String, Integer> addedGoods){
         if(!cartPage.cartIsntEmpty()) {
             cartPage.rememberGoodsNameAndPriceInCart(); //Получение товаров из корзины.
@@ -49,14 +52,16 @@ public class StepsCartPage {
     /**
      * Проверка видимости кнопки "Перейти к оформлению".
      */
+    @Step("Проверка видимости кнопки \"Перейти к оформлению\"")
     public void continueButtonIsDisplayed(){
         Assert.assertTrue(cartPage.continueButtonIsDisplayed(),
                 "Кнопка \"Перейти к оформлению\" не отображается.");
     }
 
     /**
-     * Проверка отображается ли заголовок и содержит в зоголовке "В корзине X товар(а)" реальное кол-во товара.
+     * Проверка отображается ли заголовок и содержит в себе "В корзине X товар(а)" реальное кол-во товара.
      */
+    @Step("Проверка отображается ли заголовок и содержит в себе \"В корзине X товар(а)\" реальное кол-во товара")
     public void headerThatContainsQuantityGoodsIsDisplayed(){
         Assert.assertTrue(cartPage.headerThatContainsQuantityGoodsIsDisplayed() &&
                 (cartPage.headerQuantityGoodsIsCart() == cartPage.getCartSize()),
@@ -64,8 +69,9 @@ public class StepsCartPage {
     }
 
     /**
-     * Проверка общей стоимости товаров с ожидаемой стоимостью из header.
+     * Проверка общей стоимости товаров с ожидаемой стоимостью из заголовка.
      */
+    @Step("Проверка общей стоимости товаров с ожидаемой стоимостью из заголовка")
     public void realSummOfGoodsEqualsToExpectedSumm(){
         Assert.assertEquals(cartPage.realSummOfGoods(), cartPage.expectedSummOfGoods(),
                 "Общая сумма товаров не совпадает с суммой из заголовка");

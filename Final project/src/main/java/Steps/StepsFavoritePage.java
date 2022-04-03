@@ -1,6 +1,7 @@
 package Steps;
 
 import Pages.FavoritePage;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import java.util.Map;
 
@@ -11,9 +12,10 @@ public class StepsFavoritePage {
     }
 
     /**
-     * Сравнение товаров находящихся в корзине с товарами, которые были добавлены.
+     * Сравнение товаров находящихся в избранном с товарами, которые были добавлены.
      * @param addedGoods map добавленных товаров.
      */
+    @Step("Сравнение товаров находящихся в избранном с товарами, которые были добавлены")
     public void checkAddedGoodAndExistedGood(Map<String, Integer> addedGoods){
         if(!favoritePage.favoriteGoodsIsntEmpty()) {
             favoritePage.rememberGoodsNameAndPriceInFavorite(); //Получение товаров из корзины.
@@ -29,7 +31,7 @@ public class StepsFavoritePage {
     }
 
     /**
-     * Проверка кол-ва  добавляемых товаров и товаров в корзине.
+     * Проверка кол-ва  добавляемых товаров и товаров в избранном.
      * @param addedGoods map добавленных товаров.
      * @return true - кол-во совпадает, false кол-во не совпадает.
      */

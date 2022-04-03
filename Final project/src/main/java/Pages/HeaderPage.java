@@ -5,7 +5,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
-
 import java.time.Duration;
 import java.util.Objects;
 import static Tools.XpathFormatter.formatXpath;

@@ -15,6 +15,7 @@ public class StepsAuthorizationPage {
     /**
      * Отображение кнопки закрытия модального окна.
      */
+    @Step("Отображение кнопки закрытия модального окна")
     public void closeButtonIsDisplayed(){
         Assert.assertTrue(authorizationPage.closeButtonIsDisplayed(),
                 "Кнопка закрытия модального окна не отображается.");
@@ -23,6 +24,7 @@ public class StepsAuthorizationPage {
     /**
      * Модального окно и заголовок "Вход или регистрация" отображается.
      */
+    @Step("Модального окно и заголовок \"Вход или регистрация\" отображается")
     public void modalWindowIsDisplayed(){
         Assert.assertTrue(authorizationPage.modalWindowIsDisplayed() && authorizationPage.headerIsDisplayed(),
                 "Модального окно или заголовок \"Вход или регистрация\" не отображается.");
@@ -31,6 +33,7 @@ public class StepsAuthorizationPage {
     /**
      * Отображение input field с плейсхолдером “Телефон”.
      */
+    @Step("Отображение input field с плейсхолдером \"Телефон\"")
     public void phoneInputFieldIsDisplayed(){
         Assert.assertTrue(authorizationPage.phoneInputFieldIsDisplayed(),
                 "Input field с плейсхолдером \"Телефон\" не отображается.");
@@ -39,6 +42,7 @@ public class StepsAuthorizationPage {
     /**
      * Кнопка продолжить отображается и неактивна.
      */
+    @Step("Кнопка продолжить отображается и неактивна")
     public void сontinueButtonIsDisplayedAndIsDisabled(){
         Assert.assertTrue(authorizationPage.сontinueButtonIsDisplayed() && authorizationPage.сontinueButtonIsDisabled(),
                 "Кнопка продолжить не отображается или активна.");
@@ -47,6 +51,7 @@ public class StepsAuthorizationPage {
     /**
      * Отображение кнопки "Для юридических лиц".
      */
+    @Step("Отображение кнопки \"Для юридических лиц\"")
     public void buttonForLawPersonsIsDisplayed(){
         Assert.assertTrue(authorizationPage.buttonForLawPersonsIsDisplayed(),
                 "Кнопка \"Для юридических лиц\" не отображается.");
